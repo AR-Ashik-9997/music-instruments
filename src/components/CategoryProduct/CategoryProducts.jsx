@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import BookingModal from "../BookingModal/BookingModal";
 
 const CategoryProducts = () => {
   const products = useLoaderData();
-  console.log(products);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <Container>
       <Row>
@@ -35,7 +36,7 @@ const CategoryProducts = () => {
                     <ListGroup.Item>Seller-Name: {product.sellerName}</ListGroup.Item>
                   </ListGroup>
                   <Card.Body>
-                    <Button variant="outline-primary">Book Now</Button>
+                    <Button variant="outline-primary" onClick={() => setModalShow(true)}>Book Now</Button>
                   </Card.Body>
                 </Col>
               </Row>
@@ -43,6 +44,8 @@ const CategoryProducts = () => {
           </Col>
         ))}
       </Row>
+      <BookingModal show={modalShow}
+        onHide={() => setModalShow(false)}/>      
     </Container>
   );
 };
