@@ -6,6 +6,7 @@ import CategoryProducts from './../components/CategoryProduct/CategoryProducts';
 import SignUp from "../components/Register/SignUp";
 import Login from "../components/Login/Login";
 import PrivateRoute from './../components/PrivateRoute/PrivateRoute';
+import AddProduct from "../components/AddProduct/AddProduct";
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><CategoryProducts /></PrivateRoute>,
         loader: async ({params})=>fetch(`http://localhost:5000/cardProduct/${params.id}`),
       },
+      {path: "/addProduct", element: <AddProduct />},      
       {path: "/signup", element: <SignUp />},      
       {path: "/signIn", element: <Login />}      
     ],
