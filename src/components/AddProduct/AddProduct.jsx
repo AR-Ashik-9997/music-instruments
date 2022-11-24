@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import axios from "axios";
+import { v4 } from "uuid";
 const AddProduct = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
+    const geneatedId = v4();
     const form = event.target;
     const productName = form.name.value;
     const image = form.image.value;
@@ -17,8 +19,9 @@ const AddProduct = () => {
     const used = form.used.value;
     axios({
       method: "post",
-      url: "http://localhost:5000/bookingProducts",
+      url: "http://localhost:5000/AddProduct",
       data: {
+        categoryId: geneatedId,
         productName: productName,
         image: image,
         phone: phone,
@@ -29,6 +32,17 @@ const AddProduct = () => {
         originalPrice: originalPrice,
         description: description,
         used: used,
+      },
+    })
+      .then((response) => console.log(response))
+      .then({});
+
+    axios({
+      method: "post",
+      url: "http://localhost:5000/AddCategory",
+      data: {
+        categoryId: geneatedId,
+        name: category,
       },
     })
       .then((response) => console.log(response))
@@ -59,6 +73,7 @@ const AddProduct = () => {
                     placeholder="Product Name"
                     name="name"
                     autoComplete="off"
+                    required
                   />
                 </Form.Group>
                 <Form.Group className="mb-4" controlId="formBasicPhoto">
@@ -68,6 +83,7 @@ const AddProduct = () => {
                     placeholder="Photo-URL"
                     className="rounded-3"
                     autoComplete="off"
+                    required
                   />
                 </Form.Group>
                 <Form.Group className="mb-4" controlId="formBasicprice">
@@ -77,6 +93,7 @@ const AddProduct = () => {
                     placeholder="Sell Price"
                     className="rounded-3"
                     autoComplete="off"
+                    required
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicOption">
@@ -87,7 +104,13 @@ const AddProduct = () => {
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicphone">
-                  <Form.Control type="tel" placeholder="Phone" name="phone" />
+                  <Form.Control
+                    type="tel"
+                    placeholder="Phone"
+                    name="phone"
+                    required
+                    autoComplete="off"
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasiclocation">
                   <Form.Select name="location">
@@ -102,17 +125,23 @@ const AddProduct = () => {
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCategory">
-                  <Form.Control
-                    type="text"
-                    placeholder="Category Name"
-                    name="category"
-                  />
+                  <Form.Select name="category">
+                    <option value="Violin">Violin</option>
+                    <option value="Saxophone">Saxophone</option>
+                    <option value="Guitar">Guitar</option>
+                    <option value="Cello">Cello</option>
+                    <option value="Harp">Harp</option>
+                    <option value="Piano">Piano</option>
+                    <option value="Drum Set">Drum Set</option>
+                  </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicOriginalPrice">
                   <Form.Control
                     type="number"
                     placeholder="Original Price"
                     name="originalPrice"
+                    required
+                    autoComplete="off"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicYearofUsed">
@@ -139,6 +168,7 @@ const AddProduct = () => {
                     placeholder="Your Description here...."
                     rows="3"
                     autoComplete="off"
+                    required
                   />
                 </Form.Group>
                 <div className="d-flex justify-content-center">
