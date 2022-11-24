@@ -1,9 +1,32 @@
 import React, { useContext } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { AuthContext } from './../../utility/AuthProvider';
-
+import axios from "axios";
 const BookingModal = (props) => {
-  const {user}=useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const phone = form.phone.value;
+    const location = form.location.value;
+    const usename = form.username.value;
+    const email = form.email.value;
+    axios({
+      method: "post",
+      url: "http://localhost:5000/bookingProducts",
+      data: {
+        productId: props.product._id,
+        email: email,
+        usename: usename,
+        location: location,
+        phone: phone,
+      },
+    })
+      .then((response) =>console.log(response))
+      .then({});
+    form.reset();
+  };
   return (
     <Modal
       {...props}
@@ -12,14 +35,14 @@ const BookingModal = (props) => {
       centered
     >
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-4" controlId="formBasicname">
             <Form.Control
               name="username"
               type="text"
               placeholder="Full Name"
-              className="rounded-3 " 
-              value={user.displayName}                                  
+              className="rounded-3 "
+              value={user.displayName}
               disabled
             />
           </Form.Group>
@@ -39,7 +62,7 @@ const BookingModal = (props) => {
               type="text"
               placeholder="Price"
               className="rounded-3 mb-2"
-              value={props.price}
+              value={props.product.resalePrice}
               disabled
             />
           </Form.Group>
