@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { AuthContext } from './../../utility/AuthProvider';
 
 const BookingModal = (props) => {
+  const {user}=useContext(AuthContext);
   return (
     <Modal
       {...props}
@@ -16,7 +18,8 @@ const BookingModal = (props) => {
               name="username"
               type="text"
               placeholder="Full Name"
-              className="rounded-3 "                            
+              className="rounded-3 " 
+              value={user.displayName}                                  
               disabled
             />
           </Form.Group>
@@ -26,6 +29,7 @@ const BookingModal = (props) => {
               type="email"
               placeholder="Enter email"
               className="rounded-3 mb-2"
+              value={user.email}
               disabled
             />
           </Form.Group>
@@ -35,6 +39,7 @@ const BookingModal = (props) => {
               type="text"
               placeholder="Price"
               className="rounded-3 mb-2"
+              value={props.price}
               disabled
             />
           </Form.Group>

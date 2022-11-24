@@ -6,10 +6,11 @@ import BookingModal from "../BookingModal/BookingModal";
 const CategoryProducts = () => {
   const products = useLoaderData();
   const [modalShow, setModalShow] = useState(false);
+  const [price] = useState(products[0]);  
   return (
     <Container>
       <Row>
-        {products.map((product, index) => (
+        {products.map((product) => (          
           <Col lg={4} md={6} sm={12} key={product._id}>
             <Card>
               <Row>
@@ -45,7 +46,9 @@ const CategoryProducts = () => {
         ))}
       </Row>
       <BookingModal show={modalShow}
-        onHide={() => setModalShow(false)}/>      
+        onHide={() => setModalShow(false)}
+        price={price.resalePrice}
+        />      
     </Container>
   );
 };
