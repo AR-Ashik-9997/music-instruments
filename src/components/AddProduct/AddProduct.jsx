@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import axios from "axios";
 import { v4 } from "uuid";
+import { AuthContext } from "../../utility/AuthProvider";
+import axios from "axios";
 const AddProduct = () => {
+  const { user } = useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const geneatedId = v4();
@@ -17,37 +19,74 @@ const AddProduct = () => {
     const originalPrice = form.originalPrice.value;
     const description = form.description.value;
     const used = form.used.value;
-    axios({
-      method: "post",
-      url: "http://localhost:5000/AddProduct",
-      data: {
-        categoryId: geneatedId,
-        productName: productName,
-        image: image,
-        phone: phone,
-        sellPrice: sellPrice,
-        condition: condition,
-        location: location,
-        category: category,
-        originalPrice: originalPrice,
-        description: description,
-        used: used,
-      },
-    })
-      .then((response) => console.log(response))
-      .then({});
-
-    axios({
-      method: "post",
-      url: "http://localhost:5000/AddCategory",
-      data: {
-        categoryId: geneatedId,
-        name: category,
-      },
-    })
-      .then((response) => console.log(response))
-      .then({});
-    form.reset();
+    const currentTime = new Date().toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+    fetch(`http://localhost:5000/allCategory?name=${category}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.name === category) {
+          axios({
+            method: "post",
+            url: "http://localhost:5000/AddProduct",
+            data: {
+              email: user.email,
+              categoryId: data.categoryId,
+              productName: productName,
+              image: image,
+              phone: phone,
+              sellPrice: sellPrice,
+              condition: condition,
+              location: location,
+              category: category,
+              originalPrice: originalPrice,
+              description: description,
+              used: used,
+              postedTime: currentTime,
+              status: "Available",
+            },
+          })
+            .then((response) => console.log(response))
+            .then({});
+          form.reset();
+        } else {
+          axios({
+            method: "post",
+            url: "http://localhost:5000/AddProduct",
+            data: {
+              email: user.email,
+              categoryId: geneatedId,
+              productName: productName,
+              image: image,
+              phone: phone,
+              sellPrice: sellPrice,
+              condition: condition,
+              location: location,
+              category: category,
+              originalPrice: originalPrice,
+              description: description,
+              used: used,
+              postedTime: currentTime,
+              status: "Available",
+            },
+          })
+            .then((response) => console.log(response))
+            .then({});
+          axios({
+            method: "post",
+            url: "http://localhost:5000/AddCategory",
+            data: {
+              categoryId: geneatedId,
+              name: category,
+            },
+          })
+            .then((response) => console.log(response))
+            .then({});
+          form.reset();
+        }
+      });
   };
   return (
     <div className="home-container">

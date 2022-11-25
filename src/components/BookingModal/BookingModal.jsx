@@ -17,7 +17,7 @@ const BookingModal = (props) => {
       url: "http://localhost:5000/bookingProducts",
       data: {
         productId: props.product._id,
-        email: email,
+        buyerEmail: email,
         usename: usename,
         location: location,
         phone: phone,

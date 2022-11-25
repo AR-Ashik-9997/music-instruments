@@ -7,8 +7,9 @@ import SignUp from "../components/Register/SignUp";
 import Login from "../components/Login/Login";
 import PrivateRoute from './../components/PrivateRoute/PrivateRoute';
 import AddProduct from "../components/AddProduct/AddProduct";
-import Dashboard from "../components/Dashboard/Dashboard";
 import DashLayout from "../components/DashboardLayout/DashLayout";
+import MyProduct from "../components/MyProduct/MyProduct";
+import MyBuyers from "../components/MyBuyers/MyBuyers";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,8 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "/dashboard/myProduct",element:<Dashboard/> }
+      { path: "/dashboard/myProduct",element:<MyProduct/> },
+      { path: "/dashboard/myBuyer",element:<MyBuyers/> },
     ],
   },
 ]);

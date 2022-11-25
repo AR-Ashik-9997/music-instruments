@@ -13,16 +13,27 @@ const Home = () => {
       return data;
     },
   })
+  console.log(catagoriesData);
+  // const { data: productLength = [] } = useQuery({
+  //   queryKey: ["productLength"],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5000/serchingProduct?categoryId=${categoryId}`);
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // })
   return (
     <div>
       <section>
         <Container>
           <Row className="g-4">
+            
             {
               catagoriesData.map((category)=>(
-                <CardCatagories data={category} key={category._id}/>
+                <CardCatagories data={category}  key={category._id}/>
               ))
-            }           
+            }  
+            
           </Row>
         </Container>
       </section>
