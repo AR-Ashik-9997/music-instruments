@@ -12,16 +12,7 @@ const Home = () => {
       const data = await res.json();
       return data;
     },
-  })
-  console.log(catagoriesData);
-  // const { data: productLength = [] } = useQuery({
-  //   queryKey: ["productLength"],
-  //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/serchingProduct?categoryId=${categoryId}`);
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // })
+  })  
   return (
     <div>
       <section>

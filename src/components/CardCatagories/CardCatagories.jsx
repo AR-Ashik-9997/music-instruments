@@ -4,16 +4,11 @@ import { Link } from "react-router-dom";
 
 const CardCatagories = ({ data }) => {
 
-  
-
   return (
     <Col lg={4} md={6} sm={12}>
       <Card>
         <Card.Body>
           <Card.Title className="text-center">{data.name}</Card.Title>
-          <Card.Text className="text-center">
-            {/* {productLength.length} products are available */}
-          </Card.Text>
           <div className="d-flex justify-content-center">
             <Link to={`/category/${data.categoryId}`}>
               <Button variant="outline-primary">View Product</Button>

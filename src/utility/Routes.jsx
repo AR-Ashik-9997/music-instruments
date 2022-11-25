@@ -10,6 +10,7 @@ import AddProduct from "../components/AddProduct/AddProduct";
 import DashLayout from "../components/DashboardLayout/DashLayout";
 import MyProduct from "../components/MyProduct/MyProduct";
 import MyBuyers from "../components/MyBuyers/MyBuyers";
+import MyOrder from "../components/MyOrder/MyOrder";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/dashboard/myProduct",element:<MyProduct/> },
       { path: "/dashboard/myBuyer",element:<MyBuyers/> },
+      { path: "/dashboard/myOrder",element:<MyOrder/> },
     ],
   },
 ]);

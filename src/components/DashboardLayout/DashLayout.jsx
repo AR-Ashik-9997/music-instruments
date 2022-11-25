@@ -10,11 +10,12 @@ const DashLayout = () => {
            <Header/>
             <Container>
                 <Row>
-                    <Col lg={2} md={2} className="bg-light h-100vh">
+                    <Col lg={2} md={2}>                        
                         <Nav>
                         <Nav.Link as={Link} to="/dashboard/myProduct" className='fs-5 text-center'>My Product</Nav.Link>
                         <Nav.Link as={Link} to="/dashboard/myBuyer" className='fs-5 text-center'>My Buyer</Nav.Link>                       
-                        </Nav>
+                        <Nav.Link as={Link} to="/dashboard/myOrder" className='fs-5 text-center'>My Order</Nav.Link>                       
+                        </Nav>                        
                     </Col>
                     <Col lg={10} md={10}>                        
                         <Outlet />

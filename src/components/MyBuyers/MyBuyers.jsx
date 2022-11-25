@@ -23,14 +23,12 @@ const MyBuyers = () => {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th className="text-center">Product Name</th>
-                  <th className="text-center">Category Name</th>
-                  <th className="text-center">Sell Price</th>
-                  <th className="text-center">Original Price</th>
-                  <th className="text-center">Posted Time</th>
-                  <th className="text-center">Status</th>
-                  <th className="text-center">Advertisement</th>
-                  <th className="text-center">Action</th>
+                  <th className="text-center">Name</th>
+                  <th className="text-center">Email</th>
+                  <th className="text-center">Phone</th>
+                  <th className="text-center">Location</th>
+                  <th className="text-center">Preoduct Name</th>
+                  <th className="text-center">Status</th>                  
                 </tr>
               </thead>
               <tbody></tbody>

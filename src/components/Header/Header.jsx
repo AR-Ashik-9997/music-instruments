@@ -21,10 +21,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/catagory">
-              Catagory
-            </Nav.Link>
+          <Nav className="ms-auto">            
             <Nav.Link as={Link} to="/addProduct">
               Add Product
             </Nav.Link>

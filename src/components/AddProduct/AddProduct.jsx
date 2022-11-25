@@ -33,6 +33,7 @@ const AddProduct = () => {
             url: "http://localhost:5000/AddProduct",
             data: {
               email: user.email,
+              sellarName:user.displayName,
               categoryId: data.categoryId,
               productName: productName,
               image: image,
@@ -101,7 +102,7 @@ const AddProduct = () => {
               />
             </div>
           </Col>
-          <Col lg={7} md={6} sm={12}>
+          <Col lg={7} md={6} sm={12}>            
             <div className="bg-white rounded-4 mx-auto mt-5 mb-5">
               <h1 className="text-center mb-4 pt-5">Add Product</h1>
               <Form className="mx-auto w-75" onSubmit={handleSubmit}>

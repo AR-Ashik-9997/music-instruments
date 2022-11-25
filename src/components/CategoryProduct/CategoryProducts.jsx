@@ -1,55 +1,69 @@
-import React, { useState } from "react";
-import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../utility/AuthProvider";
 import BookingModal from "../BookingModal/BookingModal";
 
 const CategoryProducts = () => {
+  const {user}= useContext(AuthContext);
   const products = useLoaderData();
   const [modalShow, setModalShow] = useState(false);
-  const [product] = useState(products[0]);  
- 
+  const [product] = useState(products[0]);
+  const handleReport=()=>{
+    axios({
+      method: "post",
+      url: "http://localhost:5000/AddReport",
+      data: {
+        category:product.category,
+        product:product.productName,
+        username:user.displayName,
+        email:user.email,
+      },
+    })
+      .then((response) => console.log(response))
+      .then({});
+  }
+  
   return (
-    <Container> 
+    <Container>
       <Row>
-        {products.map((product) => (          
-          <Col lg={4} md={6} sm={12} key={product._id}>
+        {products.map((product) => (
+          <Col lg={4} md={6} sm={12}>
             <Card>
-              <Row>
-                <Col md={6}>
-                  <Card.Img
-                    variant="top"
-                    src="https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg"
-                  className="img-fluid"
-                  />
-                </Col>
-                <Col md={6}>
-                  <Card.Body>
-                    <div className="d-flex justify-content-between">
-                      <Card.Title>{product.name}</Card.Title>
-                      <Card.Text>{product.resalePrice}</Card.Text>
-                    </div>
-                    <Card.Text>{product.postedTime}</Card.Text>
-                  </Card.Body>
-                  <Card.Header>Featured</Card.Header>
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>Location: {product.location}</ListGroup.Item>
-                    <ListGroup.Item>Used-time: {product.yearsOfUse}</ListGroup.Item>
-                    <ListGroup.Item>Original-Price: {product.originalPrice}</ListGroup.Item>
-                    <ListGroup.Item>Seller-Name: {product.sellerName}</ListGroup.Item>
-                  </ListGroup>
-                  <Card.Body>
-                    <Button variant="outline-primary" onClick={() => setModalShow(true)}>Book Now</Button>
-                  </Card.Body>
-                </Col>
-              </Row>
+              <Card.Img variant="top" src={product.image} />
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <Card.Title>{product.productName}</Card.Title>
+                  <Card.Title>$ {product.sellPrice}</Card.Title>
+                </div>
+                <Card.Text>{product.description}</Card.Text>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <Card.Text><strong>Location: </strong> {product.location}</Card.Text>
+                    <Card.Text><strong>used of time: </strong> {product.used}</Card.Text>
+                  </div>
+
+                  <div>
+                    <Card.Text><strong>Original Price:</strong> ${product.originalPrice}</Card.Text>
+                    <Card.Text><strong>{product.sellarName}</strong></Card.Text>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-around mt-4">
+                <Button variant="outline-primary" onClick={() => setModalShow(true)}>Book Now</Button>
+                <Button variant="outline-primary" onClick={handleReport}>Report to Admin</Button>
+                </div>
+                
+              </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
-      <BookingModal show={modalShow}
+      <BookingModal
+        show={modalShow}
         onHide={() => setModalShow(false)}
         product={product}
-        />      
+      />
     </Container>
   );
 };
