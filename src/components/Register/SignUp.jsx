@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import * as EmailValidator from "email-validator";
-import { AuthContext } from "../../utility/AuthProvider";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../utility/AuthProvider";
 
-
-const SignUp = () => {  
-  const navigate = useNavigate();
+const SignUp = () => {
   const { signUp, updateUserProfile } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -60,28 +59,27 @@ const SignUp = () => {
     const form = event.target;
     const username = form.username.value;
     const photo = form.photoUrl.value;
+    const role = form.role.value;
     const email = userInfo.email;
-    const password = userInfo.password;
-    signUp(email, password)
+    const password = userInfo.password;     
+    
+      signUp(email, password)
       .then((res) => {
-        handleupdateProfile(username, photo);
-        const user = res.user;
-        const currentUser = {
-          email: user.email,
-        };
-        fetch("https://service-data.vercel.app/jwt ", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            localStorage.setItem("secret-token", data.token);
-          });
+        handleupdateProfile(username, photo);       
         setErrors({ ...errors, firebase: "" });
-        setLoading(false);
+        axios({
+          method: "post",
+          url: "http://localhost:5000/AddRegister",
+          data: {
+            username: username,
+            photo: photo,
+            role: role,
+            email: email,
+            password: password,
+          },
+        })
+          .then((response) => console.log(response))
+          .then({}); 
         form.reset();
         navigate("/");
       })
@@ -105,13 +103,6 @@ const SignUp = () => {
 
   return (
     <Container className="home-container">
-      {loading ? (
-        <div className="d-flex justify-content-center">
-          <Spinner animation="border" variant="success" />
-        </div>
-      ) : (
-        <></>
-      )}
       <Row>
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
@@ -146,6 +137,12 @@ const SignUp = () => {
                   autoComplete="off"
                 />
               </Form.Group>
+              <Form.Group className="mb-4" controlId="formBasicRole">
+                <Form.Select name="role">
+                  <option value="buyer">Buyer</option>
+                  <option value="seller">Seller</option>
+                </Form.Select>
+              </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicEmail">
                 <Form.Control
                   name="email"
@@ -176,7 +173,6 @@ const SignUp = () => {
                   variant="outline-info"
                   type="submit"
                   className="w-75 mb-4 rounded-3"
-                  onClick={() => setLoading(true)}
                 >
                   Sign-Up
                 </Button>

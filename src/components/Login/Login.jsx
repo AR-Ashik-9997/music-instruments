@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
-import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Form, Row} from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as EmailValidator from "email-validator";
 import { BiLogInCircle } from "react-icons/bi";
@@ -14,8 +14,7 @@ const Login = () => {
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-  const [loading, setLoading] = useState(false);
+  const from = location.state?.from?.pathname || "/"; 
   const [userInfo, setUserInfo] = useState({
     email: "",
   });
@@ -41,23 +40,7 @@ const Login = () => {
     const password = form.password.value;
     const email = userInfo.email;
     SignInForm(email, password)
-      .then((res) => {
-        setLoading(false);
-        const user = res.user;
-        const currentUser = {
-          email: user.email,
-        };
-        fetch("https://service-data.vercel.app/jwt ", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            localStorage.setItem("secret-token", data.token);
-          });
+      .then((res) => {               
         setErrors({ ...errors, firebase: "" });
         form.reset();
 
@@ -71,26 +54,11 @@ const Login = () => {
   const googleSignIn = () => {
     signInGoogle(googleProvider)
       .then((res) => {
-        setErrors({ ...errors, firebase: "" });
-        const user = res.user;
-        const currentUser = {
-          email: user.email,
-        };
-        fetch("https://service-data.vercel.app/jwt ", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            localStorage.setItem("secret-token", data.token);
-            navigate(from, { replace: true });
-          });
+        setErrors({ ...errors, firebase: "" });          
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });
+        navigate(from, { replace: true });
       });
   };
   const GithubSignIn = () => {
@@ -104,14 +72,7 @@ const Login = () => {
       });
   };
   return (
-    <Container className="home-container">
-      {loading ? (
-        <div className="d-flex justify-content-center">
-          <Spinner animation="border" variant="success" />
-        </div>
-      ) : (
-        <></>
-      )}
+    <Container className="home-container">      
       <Row>
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
@@ -153,8 +114,7 @@ const Login = () => {
                 <Button
                   variant="outline-info"
                   type="submit"
-                  className="w-50  mb-4 rounded-3"
-                  onClick={() => setLoading(true)}
+                  className="w-50  mb-4 rounded-3"               
                 >
                   Sign-In <BiLogInCircle className="fs-5" />
                 </Button>
