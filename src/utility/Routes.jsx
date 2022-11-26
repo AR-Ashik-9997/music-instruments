@@ -11,6 +11,9 @@ import DashLayout from "../components/DashboardLayout/DashLayout";
 import MyProduct from "../components/MyProduct/MyProduct";
 import MyBuyers from "../components/MyBuyers/MyBuyers";
 import MyOrder from "../components/MyOrder/MyOrder";
+import SellerInformation from "../components/Admin/SellerInformation";
+import AllBuyerInfo from "../components/Admin/AllBuyerInfo";
+import ReportedInfo from "../components/Admin/ReportedInfo";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +31,6 @@ const router = createBrowserRouter([
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/cardProduct/${params.id}`),
       },
-      { path: "/addProduct", element: <AddProduct /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/signIn", element: <Login /> },
     ],
@@ -41,9 +43,13 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "/dashboard/myProduct",element:<MyProduct/> },
-      { path: "/dashboard/myBuyer",element:<MyBuyers/> },
-      { path: "/dashboard/myOrder",element:<MyOrder/> },
+      { path: "/dashboard/myProduct", element: <MyProduct /> },
+      { path: "/dashboard/addProduct", element: <AddProduct /> },
+      { path: "/dashboard/myBuyer", element: <MyBuyers /> },
+      { path: "/dashboard/myOrder", element: <MyOrder /> },
+      { path: "/dashboard/all-seller", element: <SellerInformation /> },
+      { path: "/dashboard/all-buyer", element: <AllBuyerInfo /> },
+      { path: "/dashboard/reported-info", element: <ReportedInfo /> },
     ],
   },
 ]);

@@ -20,7 +20,7 @@ const MyOrder = () => {
             {orderInfo.length > 0 ? (
               <>
                 <h1 className="text-center mb-5">My Order</h1>
-                <Table striped bordered hover>
+                <Table striped bordered hover responsive>
                   <thead>
                     <tr>
                       <th className="text-center">Image</th>
@@ -32,9 +32,11 @@ const MyOrder = () => {
                   <tbody>
                     {orderInfo.map((order) => (
                       <tr key={order._id}>
-                        <td className="text-center">{order.img}</td>
+                        <td className="text-center">
+                          <img src={order.img} className="order-image" alt="" />
+                        </td>
                         <td className="text-center">{order.productName}</td>
-                        <td className="text-center">$ {order.sellPrice}</td>
+                        <td className="text-center ">$ {order.sellPrice}</td>
                         <td className="text-center"><Button variant="outline-primary">Payment</Button></td>
                       </tr>
                     ))}

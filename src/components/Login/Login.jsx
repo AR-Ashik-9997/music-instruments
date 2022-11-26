@@ -7,6 +7,7 @@ import * as EmailValidator from "email-validator";
 import { BiLogInCircle } from "react-icons/bi";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,10 +41,9 @@ const Login = () => {
     const password = form.password.value;
     const email = userInfo.email;
     SignInForm(email, password)
-      .then((res) => {               
+      .then((res) => {
         setErrors({ ...errors, firebase: "" });
         form.reset();
-
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -54,12 +54,25 @@ const Login = () => {
   const googleSignIn = () => {
     signInGoogle(googleProvider)
       .then((res) => {
-        setErrors({ ...errors, firebase: "" });          
+        setErrors({ ...errors, firebase: "" });
+        const user = res.user;               
+        axios({
+          method: "post",
+          url: "http://localhost:5000/AddRegister",
+          data: {
+            username: user.displayName,
+            photo: user.photoURL,
+            role: "buyer",
+            email: user.email,          
+          },
+        })
+          .then((response) => console.log(response))
+          .then(data=>{
+            navigate(from, { replace: true });
+          });         
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });
-        
-        navigate(from, { replace: true });
       });
   };
   const GithubSignIn = () => {

@@ -39,7 +39,7 @@ const CategoryProducts = () => {
           <Row className="flex-column-reverse flex-lg-row">
             <Col
               lg={6}
-              md={6}
+              md={12}
               sm={12}
               className="d-flex flex-column align-items-center justify-content-center"
             >
@@ -53,7 +53,7 @@ const CategoryProducts = () => {
                 <Button className="mt-4">Shop Now</Button>
               </div>
             </Col>
-            <Col lg={6} md={6} sm={12}>
+            <Col lg={6} md={12} sm={12}>
               <Swiper
                 spaceBetween={30}
                 effect={"fade"}

@@ -21,7 +21,7 @@ const Home = () => {
           <Row className="flex-column-reverse flex-lg-row">
             <Col
               lg={6}
-              md={6}
+              md={12}
               sm={12}
               className="d-flex flex-column align-items-center justify-content-center"
             >
@@ -37,17 +37,17 @@ const Home = () => {
             </Col>
             <Col
               lg={6}
-              md={6}
+              md={12}
               sm={12}
-              className="d-flex flex-column align-items-center justify-content-center"
+              className="d-flex flex-column align-items-center justify-content-center "
             >
-              <div>
+             
                 <img
                   src="https://i.ibb.co/Drd787T/banner.png"
                   alt=""
                   className="img-fluid mx-auto d-block"
                 />
-              </div>
+             
             </Col>
           </Row>
         </Container>
