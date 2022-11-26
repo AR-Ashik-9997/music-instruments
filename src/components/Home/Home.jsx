@@ -5,6 +5,7 @@ import CardCatagories from "./../CardCatagories/CardCatagories";
 import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
+  
   const { data: catagoriesData = [] } = useQuery({
     queryKey: ["catagoriesData"],
     queryFn: async () => {
@@ -55,6 +56,7 @@ const Home = () => {
             {catagoriesData.map((category) => (
               <CardCatagories data={category} key={category._id} />
             ))}
+           
           </Row>
         </Container>
       </section>

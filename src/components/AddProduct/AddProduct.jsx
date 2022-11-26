@@ -42,7 +42,7 @@ const AddProduct = () => {
       hour12: true,
     });
 
-    fetch(`http://localhost:5000/allCategory?name=${category}`)
+    fetch(`http://localhost:5000/all-Category-data-find?name=${category}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.name === category) {
