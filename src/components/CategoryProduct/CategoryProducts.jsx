@@ -16,14 +16,14 @@ const CategoryProducts = () => {
   const products = useLoaderData();
   const [modalShow, setModalShow] = useState(false);
   const [product, setProduct] = useState([]);
-  console.log(product);
-  const handleReport = () => {
+
+  const handleReport = (data) => {
     axios({
       method: "post",
       url: "http://localhost:5000/AddReport",
       data: {
-        category: product.category,
-        product: product.productName,
+        category: data.category,
+        product: data.productName,
         username: user.displayName,
         email: user.email,
       },
@@ -165,7 +165,7 @@ const CategoryProducts = () => {
                           </Button>
                           <Button
                             variant="outline-primary"
-                            onClick={handleReport}
+                            onClick={() => handleReport(product)}
                           >
                             Report to Admin
                           </Button>
