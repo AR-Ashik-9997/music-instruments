@@ -15,7 +15,8 @@ const CategoryProducts = () => {
   const { user } = useContext(AuthContext);
   const products = useLoaderData();
   const [modalShow, setModalShow] = useState(false);
-  const [product] = useState(products[0]);
+  const [product, setProduct] = useState([]);
+  console.log(product);
   const handleReport = () => {
     axios({
       method: "post",
@@ -79,7 +80,7 @@ const CategoryProducts = () => {
                     spaceBetween: 30,
                   },
                 }}
-              >                
+              >
                 <SwiperSlide>
                   <img
                     src="https://i.ibb.co/YfnmnRX/banner.jpg"
@@ -100,8 +101,8 @@ const CategoryProducts = () => {
                     alt=""
                     className="img-fluid mx-auto d-block"
                   />
-                </SwiperSlide>                
-              </Swiper>             
+                </SwiperSlide>
+              </Swiper>
             </Col>
           </Row>
         </Container>
@@ -155,7 +156,10 @@ const CategoryProducts = () => {
                         <div className="d-flex justify-content-around mt-4">
                           <Button
                             variant="outline-primary"
-                            onClick={() => setModalShow(true)}
+                            onClick={() => {
+                              setModalShow(true);
+                              setProduct(product);
+                            }}
                           >
                             Book Now
                           </Button>

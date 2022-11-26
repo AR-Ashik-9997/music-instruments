@@ -5,7 +5,9 @@ import axios from "axios";
 const BookingModal = (props) => {
   const { user } = useContext(AuthContext);
 const { _id, image, productName, sellPrice, status } = props.product;
+
 const handleSubmit = (event) => {
+  props.onHide();
   event.preventDefault();
   const form = event.target;
   const phone = form.phone.value;
@@ -37,7 +39,11 @@ return (
     size="md"
     aria-labelledby="contained-modal-title-vcenter"
     centered
+    backdrop="static"
   >
+    <Modal.Header closeButton>
+      <Modal.Title className="justify-content-center">Book Now</Modal.Title>
+    </Modal.Header>
     <Modal.Body>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-4" controlId="formBasicname">
@@ -96,16 +102,13 @@ return (
           <Button
             variant="outline-primary"
             type="submit"
-            className="w-100 rounded-3"
+            className="w-100 rounded-3 mb-3"
           >
             submit
           </Button>
         </div>
       </Form>
     </Modal.Body>
-    <Modal.Footer>
-      <Button onClick={props.onHide}>Close</Button>
-    </Modal.Footer>
   </Modal>
 );
 };
