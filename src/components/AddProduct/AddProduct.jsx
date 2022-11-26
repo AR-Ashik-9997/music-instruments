@@ -1,16 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { v4 } from "uuid";
 import { AuthContext } from "../../utility/AuthProvider";
 import axios from "axios";
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+  const [imageUrl, setImageUrl] = useState("");
+  const handleImage = (event) => {
+    const img = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", img);
+    const url = "https://api.imgbb.com/1/upload?key=d8712d7ded066028fa6b90dd33cb71cf";
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+    .then((response) => response.json())
+            .then(imgData=>{
+              if(imgData.success){
+                setImageUrl(imgData.data.url);
+              }
+            });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const geneatedId = v4();
     const form = event.target;
     const productName = form.name.value;
-    const image = form.image.value;
     const phone = form.phone.value;
     const sellPrice = form.sellPrice.value;
     const condition = form.condition.value;
@@ -24,6 +40,7 @@ const AddProduct = () => {
       minute: "numeric",
       hour12: true,
     });
+
     fetch(`http://localhost:5000/allCategory?name=${category}`)
       .then((res) => res.json())
       .then((data) => {
@@ -33,10 +50,10 @@ const AddProduct = () => {
             url: "http://localhost:5000/AddProduct",
             data: {
               email: user.email,
-              sellarName:user.displayName,
+              sellarName: user.displayName,
               categoryId: data.categoryId,
               productName: productName,
-              image: image,
+              image: imageUrl,
               phone: phone,
               sellPrice: sellPrice,
               condition: condition,
@@ -60,7 +77,7 @@ const AddProduct = () => {
               email: user.email,
               categoryId: geneatedId,
               productName: productName,
-              image: image,
+              image: imageUrl,
               phone: phone,
               sellPrice: sellPrice,
               condition: condition,
@@ -81,6 +98,7 @@ const AddProduct = () => {
             data: {
               categoryId: geneatedId,
               name: category,
+              image:imageUrl
             },
           })
             .then((response) => console.log(response))
@@ -102,7 +120,7 @@ const AddProduct = () => {
               />
             </div>
           </Col>
-          <Col lg={7} md={6} sm={12}>            
+          <Col lg={7} md={6} sm={12}>
             <div className="bg-white rounded-4 mx-auto mt-5 mb-5">
               <h1 className="text-center mb-4 pt-5">Add Product</h1>
               <Form className="mx-auto w-75" onSubmit={handleSubmit}>
@@ -119,10 +137,10 @@ const AddProduct = () => {
                 <Form.Group className="mb-4" controlId="formBasicPhoto">
                   <Form.Control
                     name="image"
-                    type="text"
-                    placeholder="Photo-URL"
+                    type="file"
                     className="rounded-3"
                     autoComplete="off"
+                    onChange={handleImage}
                     required
                   />
                 </Form.Group>
@@ -169,7 +187,6 @@ const AddProduct = () => {
                     <option value="Violin">Violin</option>
                     <option value="Saxophone">Saxophone</option>
                     <option value="Guitar">Guitar</option>
-                    <option value="Cello">Cello</option>
                     <option value="Harp">Harp</option>
                     <option value="Piano">Piano</option>
                     <option value="Drum Set">Drum Set</option>

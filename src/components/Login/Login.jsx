@@ -58,6 +58,7 @@ const Login = () => {
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });
+        
         navigate(from, { replace: true });
       });
   };
