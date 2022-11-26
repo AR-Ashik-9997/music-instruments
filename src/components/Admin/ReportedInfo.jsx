@@ -51,7 +51,7 @@ const ReportedInfo = () => {
                   </thead>
                   <tbody>
                     {reported.map((report) => (
-                      <tr>
+                      <tr key={report._id}>
                         <td className="text-center">{report.username}</td>
                         <td className="text-center">{report.email}</td>
                         <td className="text-center">{report.category}</td>
