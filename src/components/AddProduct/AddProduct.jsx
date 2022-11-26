@@ -27,6 +27,7 @@ const AddProduct = () => {
     const geneatedId = v4();
     const form = event.target;
     const productName = form.name.value;
+    const image=imageUrl;
     const phone = form.phone.value;
     const sellPrice = form.sellPrice.value;
     const condition = form.condition.value;
@@ -53,7 +54,7 @@ const AddProduct = () => {
               sellarName: user.displayName,
               categoryId: data.categoryId,
               productName: productName,
-              image: imageUrl,
+              image: image,
               phone: phone,
               sellPrice: sellPrice,
               condition: condition,

@@ -27,43 +27,70 @@ const CategoryProducts = () => {
   
   return (
     <Container>
-      <Row>
-        {products.map((product) => (
-          <Col lg={4} md={6} sm={12}>
-            <Card>
-              <Card.Img variant="top" src={product.image} />
-              <Card.Body>
-                <div className="d-flex justify-content-between">
-                  <Card.Title>{product.productName}</Card.Title>
-                  <Card.Title>$ {product.sellPrice}</Card.Title>
-                </div>
-                <Card.Text>{product.description}</Card.Text>
-                <div className="d-flex justify-content-between">
-                  <div>
-                    <Card.Text><strong>Location: </strong> {product.location}</Card.Text>
-                    <Card.Text><strong>used of time: </strong> {product.used}</Card.Text>
-                  </div>
+      {products.length > 0 ? (
+        <>
+          <Row className="g-4">
+            {products.map((product) => (
+              <Col lg={4} md={6} sm={12} key={product._id}>
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src={product.image}
+                    className="card-image"
+                  />
+                  <Card.Body>
+                    <div className="d-flex justify-content-between">
+                      <Card.Title>{product.productName}</Card.Title>
+                      <Card.Title>$ {product.sellPrice}</Card.Title>
+                    </div>
+                    <Card.Text className="text-justify">
+                      {product.description}
+                    </Card.Text>
+                    <div className="d-flex justify-content-between">
+                      <div>
+                        <Card.Text>
+                          <strong>Location: </strong> {product.location}
+                        </Card.Text>
+                        <Card.Text>
+                          <strong>used of time: </strong> {product.used}
+                        </Card.Text>
+                      </div>
 
-                  <div>
-                    <Card.Text><strong>Original Price:</strong> ${product.originalPrice}</Card.Text>
-                    <Card.Text><strong>{product.sellarName}</strong></Card.Text>
-                  </div>
-                </div>
-                <div className="d-flex justify-content-around mt-4">
-                <Button variant="outline-primary" onClick={() => setModalShow(true)}>Book Now</Button>
-                <Button variant="outline-primary" onClick={handleReport}>Report to Admin</Button>
-                </div>
-                
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <BookingModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        product={product}
-      />
+                      <div>
+                        <Card.Text>
+                          <strong>Original Price:</strong> $
+                          {product.originalPrice}
+                        </Card.Text>
+                        <Card.Text>
+                          <strong>{product.sellarName}</strong>
+                        </Card.Text>
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-around mt-4">
+                      <Button
+                        variant="outline-primary"
+                        onClick={() => setModalShow(true)}
+                      >
+                        Book Now
+                      </Button>
+                      <Button variant="outline-primary" onClick={handleReport}>
+                        Report to Admin
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <BookingModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            product={product}
+          />
+        </>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

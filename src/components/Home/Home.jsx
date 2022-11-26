@@ -26,11 +26,10 @@ const Home = () => {
             >
               <div className="mt-5">
                 <h1>Choose Our Top Picks Music Instruments</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Quas, quibusdam!
+                <p className="w-75 text-justify mt-4">
+                It's easy to play any musical instrument: all you have to do is touch the right key at the right time and the instrument will play itself
                 </p>
-                <Button>Shop Now</Button>
+                <Button className="mt-4">Shop Now</Button>
               </div>
             </Col>
             <Col
@@ -41,7 +40,7 @@ const Home = () => {
             >
               <div>
                 <img
-                  src="https://i.postimg.cc/C14dvcMw/banner.png"
+                  src="https://i.ibb.co/Drd787T/banner.png"
                   alt=""
                   className="img-fluid mx-auto d-block"
                 />
@@ -63,7 +62,7 @@ const Home = () => {
         <Container>
           <div className="d-flex justify-content-between pt-5">
             <hr className="hr-width" />
-            <h4 className="ms-5 me-5 text-center">Community of Fans</h4>
+            <h3 className="ms-5 me-5 text-center">Community of Fans</h3>
             <hr className="hr-width" />
           </div>
           <Row className="g-4 mt-3">
@@ -123,11 +122,13 @@ const Home = () => {
               <Form className="d-flex w-75 mt-4">
                 <Form.Control
                   type="search"
-                  placeholder="Search"
+                  placeholder="Enter your email address"
                   className="me-2"
                   aria-label="Search"
                 />
-                <Button variant="outline-success">Search</Button>
+                <div>
+                <Button variant="outline-primary" className="btn-md">Join<span className="ms-2"></span>Now</Button>
+                </div>                
               </Form>
               </div>
             </Col>

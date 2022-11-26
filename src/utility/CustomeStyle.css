@@ -4,5 +4,12 @@
     border-radius: 50%;
   }
   .hr-width{
-    width: 37%;
+    width: 35%;
+  }
+  .text-justify{
+    text-align: justify;
+  }
+  .card-image{
+    width: 100%;
+    height: 350px;   
   }

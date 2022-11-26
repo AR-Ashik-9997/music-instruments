@@ -14,7 +14,7 @@ const Header = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="navbar sticky-top" bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           Music-Instruments
