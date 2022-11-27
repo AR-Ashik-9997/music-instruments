@@ -4,6 +4,7 @@ import { Row } from "react-bootstrap";
 import CardCatagories from "./../CardCatagories/CardCatagories";
 import { useQuery } from "@tanstack/react-query";
 import { AiOutlineStar,AiFillStar} from "react-icons/ai";
+import AdvertiseItems from "../Advertise/AdvertiseItems";
 
 const Home = () => {
   const { data: catagoriesData = [] } = useQuery({
@@ -14,6 +15,18 @@ const Home = () => {
       return data;
     },
   });
+
+  const { data: addvertiseProduct = [], } = useQuery({
+    queryKey: ["addvertiseProduct"],
+    queryFn: async () => {
+      const res = await fetch(
+        "http://localhost:5000/advertiseProduct?addvertise=true"
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+
   return (
     <div>
       <section className="mt-5 mb-5">
@@ -41,19 +54,43 @@ const Home = () => {
               sm={12}
               className="d-flex flex-column align-items-center justify-content-center "
             >
-             
-                <img
-                  src="https://i.ibb.co/Drd787T/banner.png"
-                  alt=""
-                  className="img-fluid mx-auto d-block"
-                />
-             
+              <img
+                src="https://i.ibb.co/Drd787T/banner.png"
+                alt=""
+                className="img-fluid mx-auto d-block"
+              />
             </Col>
           </Row>
         </Container>
       </section>
+      {addvertiseProduct.length > 0 ? (
+        <>
+          <section className="mt-5 mb-5">
+            <Container>
+              <div className="d-flex justify-content-between pt-5 pb-5">
+                <hr className="hr-width" />
+                <h3 className="ms-5 me-5 text-center">Advertise Product</h3>
+                <hr className="hr-width" />
+              </div>
+              <Row>
+                {addvertiseProduct.map((addProduct) => (
+                  <AdvertiseItems key={addProduct._id} data={addProduct} />
+                ))}
+              </Row>
+            </Container>
+          </section>
+        </>
+      ) : (
+        <></>
+      )}
+
       <section className="mt-5 mb-5">
         <Container>
+          <div className="d-flex justify-content-between pt-5 pb-5">
+            <hr className="hr-width" />
+            <h3 className="ms-5 me-5 text-center">Product Category</h3>
+            <hr className="hr-width" />
+          </div>
           <Row className="g-4">
             {catagoriesData.map((category) => (
               <CardCatagories data={category} key={category._id} />
@@ -87,7 +124,7 @@ const Home = () => {
                     <AiFillStar className="fs-3 star-color" />
                     <AiFillStar className="fs-3 star-color" />
                     <AiFillStar className="fs-3 star-color" />
-                    <AiFillStar className="fs-3 star-color" />                 
+                    <AiFillStar className="fs-3 star-color" />
                     <AiOutlineStar className="fs-3 star-color" />
                     <AiOutlineStar className="fs-3 star-color" />
                   </div>

@@ -65,6 +65,7 @@ const AddProduct = () => {
               used: used,
               postedTime: currentTime,
               status: "Available",
+              addvertise: "false",
             },
           })
             .then((response) => console.log(response))

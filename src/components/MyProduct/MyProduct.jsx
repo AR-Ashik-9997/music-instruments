@@ -5,16 +5,33 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../utility/AuthProvider";
 const MyProduct = () => {
-  const {user}=useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const notify = () => toast.success("Delete Successful.");
   const { data: MyProduct = [], refetch } = useQuery({
     queryKey: ["MyProduct"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/sellerProduct?email=${user.email}`);
+      const res = await fetch(
+        `http://localhost:5000/sellerProduct?email=${user.email}`
+      );
       const data = await res.json();
       return data;
     },
   });
+  const handleAdd = (product) => {
+    const update = {
+      advertise: "true",
+    };
+    axios({
+      url: `http://localhost:5000/update-advertisement/${product._id}`,
+      method: "put",
+      data: update,
+    })
+      .then((response) => console.log(response.data))
+      .then(() => {
+        refetch();
+      });
+  };
+
   const handleDelete = (product) => {
     const agree = window.confirm(
       `Are you sure you want to delete: ${product.productName}`
@@ -25,7 +42,7 @@ const MyProduct = () => {
         url: `http://localhost:5000/seller-product-delete/${product._id}`,
       })
         .then((response) => console.log(response.data))
-        .then(() => { 
+        .then(() => {
           notify();
           refetch();
         });
@@ -64,10 +81,15 @@ const MyProduct = () => {
                         <td className="text-center">{product.postedTime}</td>
                         <td className="text-center">{product.status}</td>
                         <td className="text-center">
-                          {product.status === "Available" ? (
-                            <Button variant="outline-primary">Advertise</Button>
+                          {product.addvertise === "true" ? (
+                            <p>product is advertising</p>
                           ) : (
-                            <Button disabled>Advertise</Button>
+                            <Button
+                              variant="outline-primary"
+                              onClick={() => handleAdd(product)}
+                            >
+                              Advertise
+                            </Button>
                           )}
                         </td>
                         <td className="text-center">

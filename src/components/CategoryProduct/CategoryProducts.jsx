@@ -10,8 +10,9 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, EffectFade } from "swiper";
-
+import toast, { Toaster } from "react-hot-toast";
 const CategoryProducts = () => {
+  const notify = () => toast.success("Report Successfully sent.");
   const { user } = useContext(AuthContext);
   const products = useLoaderData();
   const [modalShow, setModalShow] = useState(false);
@@ -29,7 +30,9 @@ const CategoryProducts = () => {
       },
     })
       .then((response) => console.log(response))
-      .then({});
+      .then(()=>{
+        notify()
+      });
   };
 
   return (
@@ -185,6 +188,7 @@ const CategoryProducts = () => {
             <h1 className="text-center mt-5 mb-5">No Data available</h1>
           )}
         </Container>
+        <Toaster />
       </section>
     </>
   );

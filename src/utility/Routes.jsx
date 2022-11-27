@@ -14,6 +14,7 @@ import MyOrder from "../components/MyOrder/MyOrder";
 import SellerInformation from "../components/Admin/SellerInformation";
 import AllBuyerInfo from "../components/Admin/AllBuyerInfo";
 import ReportedInfo from "../components/Admin/ReportedInfo";
+import Dashboard from "../components/DashboardLayout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/myProduct", element: <MyProduct /> },
       { path: "/dashboard/addProduct", element: <AddProduct /> },
       { path: "/dashboard/myBuyer", element: <MyBuyers /> },

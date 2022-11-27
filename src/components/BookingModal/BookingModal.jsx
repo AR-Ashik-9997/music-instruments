@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { AuthContext } from './../../utility/AuthProvider';
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 const BookingModal = (props) => {
   const { user } = useContext(AuthContext);
 const { _id, image, productName, sellPrice, status } = props.product;
-
+const notify = () => toast.success("Report Successfully sent.");
 const handleSubmit = (event) => {
   props.onHide();
   event.preventDefault();
@@ -30,10 +31,13 @@ const handleSubmit = (event) => {
     },
   })
     .then((response) => console.log(response))
-    .then({});
+    .then(()=>{
+      notify();
+    });
   form.reset();
 };
 return (
+  <>
   <Modal
     {...props}
     size="md"
@@ -52,7 +56,7 @@ return (
             type="text"
             placeholder="Full Name"
             className="rounded-3 "
-            value={user.displayName}
+            value={user?.displayName}
             disabled
           />
         </Form.Group>
@@ -62,7 +66,7 @@ return (
             type="email"
             placeholder="Enter email"
             className="rounded-3 mb-2"
-            value={user.email}
+            value={user?.email}
             disabled
           />
         </Form.Group>
@@ -110,6 +114,8 @@ return (
       </Form>
     </Modal.Body>
   </Modal>
+  <Toaster />
+  </>
 );
 };
 

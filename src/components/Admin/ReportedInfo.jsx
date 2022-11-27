@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
-
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 const ReportedInfo = () => {
@@ -38,7 +37,7 @@ const ReportedInfo = () => {
           <div className="mt-5 mb-5">
             {reported.length > 0 ? (
               <>
-                <h1 className="text-center mb-5">Reported Information</h1>
+                <h1 className="text-center mb-5">Reported Product Information</h1>
                 <Table striped bordered hover responsive>
                   <thead>
                     <tr>
