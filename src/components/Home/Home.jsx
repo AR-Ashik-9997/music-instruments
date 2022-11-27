@@ -20,7 +20,7 @@ const Home = () => {
     queryKey: ["addvertiseProduct"],
     queryFn: async () => {
       const res = await fetch(
-        "http://localhost:5000/advertiseProduct?addvertise=true"
+        "http://localhost:5000/advertiseProduct"
       );
       const data = await res.json();
       return data;
@@ -73,8 +73,8 @@ const Home = () => {
                 <hr className="hr-width" />
               </div>
               <Row>
-                {addvertiseProduct.map((addProduct) => (
-                  <AdvertiseItems key={addProduct._id} data={addProduct} />
+                {addvertiseProduct.map((advProduct) => (
+                  <AdvertiseItems key={advProduct._id} data={advProduct} />
                 ))}
               </Row>
             </Container>

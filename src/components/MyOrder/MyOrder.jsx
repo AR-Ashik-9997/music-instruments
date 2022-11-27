@@ -1,19 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./../../utility/AuthProvider";
 
 const MyOrder = () => {
-  const { data: orderInfo = [] } = useQuery({
-    queryKey: ["orderInfo"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/orderInfo");
-      const data = await res.json();
-      return data;
-    },
-  });
+  const { user, Logout } = useContext(AuthContext);
+  const [orderInfo, setOrderInfo] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/orderInfo?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+      },
+    })
+      .then((response) => {
+        if (response.status === 401 || response.status === 403) {
+          return Logout();
+        }
+
+        return response.json();
+      })
+      .then((data) => setOrderInfo(data));
+  }, [user?.email, Logout]);
 
   return (
     <Container>

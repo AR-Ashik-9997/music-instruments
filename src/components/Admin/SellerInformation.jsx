@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../utility/AuthProvider";
 
 const SellerInformation = () => {
+  const { Logout } = useContext(AuthContext);
   const notify = () => toast.success("Delete Successful.");
   const { data: sellerInfo = [], refetch } = useQuery({
     queryKey: ["sellerInfo"],
@@ -14,6 +16,49 @@ const SellerInformation = () => {
       return data;
     },
   });
+
+  const handlevarify = (seller) => {
+    const update = {
+      verified: "true",
+    };
+    fetch(`http://localhost:5000/varyfySeller/${seller._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+      },
+      body: JSON.stringify(update),
+    })
+      .then((response) => {
+        if (response.status === 401 || response.status === 403) {
+          return Logout();
+        }
+
+        return response.json();
+      })
+      .then(() => {
+        
+      });
+    fetch(`http://localhost:5000/updateSeller/${seller.email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+      },
+      body: JSON.stringify(update),
+    })
+      .then((response) => {
+        if (response.status === 401 || response.status === 403) {
+          return Logout();
+        }
+
+        return response.json();
+      })
+      .then(() => {
+        refetch()
+      });
+  };
+
   const handleDelete = (id) => {
     const agree = window.confirm(
       `Are you sure you want to delete: ${id.username}`
@@ -37,29 +82,46 @@ const SellerInformation = () => {
           <div className="mt-5 mb-5">
             {sellerInfo.length > 0 ? (
               <>
-                <h1 className="text-center mb-5">All Buyer Information</h1>
+                <h1 className="text-center mb-5">All Seller Information</h1>
                 <Table striped bordered hover responsive>
                   <thead>
                     <tr>
                       <th className="text-center">Photo</th>
                       <th className="text-center">Name</th>
                       <th className="text-center">Email</th>
+                      <th className="text-center">Varifyed</th>
                       <th className="text-center">Acion</th>
                     </tr>
                   </thead>
                   <tbody>
                     {sellerInfo.map((seller) => (
                       <tr key={seller._id}>
-                        <td>
+                        <td className="text-center">
                           <img
                             src={seller.photo}
                             className="order-image"
                             alt=""
                           />
                         </td>
-                        <td>{seller.username}</td>
-                        <td>{seller.email}</td>
-                        <td>
+                        <td className="text-center">{seller.username}</td>
+                        <td className="text-center">{seller.email}</td>
+                        <td className="text-center">
+                          {seller.verified === "true" ? (
+                            <>
+                              <p>verified</p>
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                variant="outline-primary"
+                                onClick={() => handlevarify(seller)}
+                              >
+                                Varify
+                              </Button>
+                            </>
+                          )}
+                        </td>
+                        <td className="text-center">
                           <Button
                             variant="outline-danger"
                             onClick={() => handleDelete(seller)}

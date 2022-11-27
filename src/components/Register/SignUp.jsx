@@ -67,21 +67,52 @@ const SignUp = () => {
       .then((res) => {
         handleupdateProfile(username, photo);       
         setErrors({ ...errors, firebase: "" });
-        axios({
-          method: "post",
-          url: "http://localhost:5000/AddRegister",
-          data: {
-            username: username,
-            photo: photo,
-            role: role,
-            email: email,
-            password: password,
+        const currentUser = {
+          email: email,
+        };
+
+        fetch("http://localhost:5000/jwt ", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
+          body: JSON.stringify(currentUser),
         })
-          .then((response) => console.log(response))
-          .then({}); 
-        form.reset();
-        navigate("/");
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem("secret-token", data.token);
+            fetch(`http://localhost:5000/checkRegister?email=${email}`, {
+              headers: {
+                authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.length > 0) {
+                  setErrors({
+                    ...errors,
+                    email: "user is exist. please try another email.",
+                  });
+                } else {
+                  axios({
+                    method: "post",
+                    url: "http://localhost:5000/AddRegister",
+                    data: {
+                      username: username,
+                      photo: photo,
+                      role: role,
+                      email: email,                     
+                      verified:"false",
+                    },
+                  })
+                    .then((response) => console.log(response))
+                    .then((data) => {});
+                  form.reset();
+                  navigate("/");
+                }
+              });
+          });    
+         
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });

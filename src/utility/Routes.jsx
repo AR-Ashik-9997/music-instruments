@@ -9,7 +9,6 @@ import PrivateRoute from './../components/PrivateRoute/PrivateRoute';
 import AddProduct from "../components/AddProduct/AddProduct";
 import DashLayout from "../components/DashboardLayout/DashLayout";
 import MyProduct from "../components/MyProduct/MyProduct";
-import MyBuyers from "../components/MyBuyers/MyBuyers";
 import MyOrder from "../components/MyOrder/MyOrder";
 import SellerInformation from "../components/Admin/SellerInformation";
 import AllBuyerInfo from "../components/Admin/AllBuyerInfo";
@@ -48,8 +47,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/myProduct", element: <SellerRoute><MyProduct /></SellerRoute>},
-      { path: "/dashboard/addProduct", element:<SellerRoute> <AddProduct /></SellerRoute> },
-      { path: "/dashboard/myBuyer", element: <MyBuyers /> },
+      { path: "/dashboard/addProduct", element:<SellerRoute> <AddProduct /></SellerRoute> },      
       { path: "/dashboard/myOrder", element: <MyOrder /> },
       { path: "/dashboard/all-seller", element: <AdminRoute><SellerInformation /></AdminRoute> },
       { path: "/dashboard/all-buyer", element: <AdminRoute><AllBuyerInfo /></AdminRoute> },

@@ -56,29 +56,47 @@ const Login = () => {
       .then((res) => {
         setErrors({ ...errors, firebase: "" });
         const user = res.user;
-        fetch(`http://localhost:5000/checkRegister?email=${user.email}`)
-         .then((res) => res.json())
-         .then((data) => {
-          if(data.length>0){
-            navigate(from, { replace: true });
-          }
-          else{
-            axios({
-              method: "post",
-              url: "http://localhost:5000/AddRegister",
-              data: {
-                username: user.displayName,
-                photo: user.photoURL,
-                role: "buyer",
-                email: user.email,          
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt ", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem("secret-token", data.token);
+            fetch(`http://localhost:5000/checkRegister?email=${user.email}`, {
+              headers: {
+                authorization: `Bearer ${localStorage.getItem("secret-token")}`,
               },
             })
-              .then((response) => console.log(response))
-              .then(data=>{
-                navigate(from, { replace: true });
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.length > 0) {
+                  navigate(from, { replace: true });
+                } else {
+                  axios({
+                    method: "post",
+                    url: "http://localhost:5000/AddRegister",
+                    data: {
+                      username: user.displayName,
+                      photo: user.photoURL,
+                      role: "buyer",
+                      email: user.email,
+                    },
+                  })
+                    .then((response) => console.log(response))
+                    .then((data) => {
+                      navigate(from, { replace: true });
+                    });
+                }
               });
-          }
-         })               
+          });
+                      
                  
       })
       .catch((error) => {

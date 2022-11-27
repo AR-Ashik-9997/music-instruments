@@ -49,16 +49,16 @@ const AllBuyerInfo = () => {
                   <tbody>
                     {buyerData.map((info) => (
                       <tr key={info._id}>
-                        <td>
+                        <td className="text-center">
                           <img
                             src={info.photo}
                             className="order-image"
                             alt=""
                           />
                         </td>
-                        <td>{info.username}</td>
-                        <td>{info.email}</td>
-                        <td>
+                        <td className="text-center">{info.username}</td>
+                        <td className="text-center">{info.email}</td>
+                        <td className="text-center">
                           <Button
                             variant="outline-danger"
                             onClick={() => handleDelete(info)}

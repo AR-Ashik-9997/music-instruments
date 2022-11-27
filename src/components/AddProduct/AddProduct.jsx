@@ -50,8 +50,8 @@ const AddProduct = () => {
             method: "post",
             url: "http://localhost:5000/AddProduct",
             data: {
-              email: user.email,
-              sellarName: user.displayName,
+              email: user?.email,
+              sellarName: user?.displayName,
               categoryId: data.categoryId,
               productName: productName,
               image: image,
@@ -76,7 +76,8 @@ const AddProduct = () => {
             method: "post",
             url: "http://localhost:5000/AddProduct",
             data: {
-              email: user.email,
+              email: user?.email,
+              sellarName: user?.displayName,
               categoryId: geneatedId,
               productName: productName,
               image: imageUrl,
@@ -90,6 +91,7 @@ const AddProduct = () => {
               used: used,
               postedTime: currentTime,
               status: "Available",
+              verified:"false",
             },
           })
             .then((response) => console.log(response))

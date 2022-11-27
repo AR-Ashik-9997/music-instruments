@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
+import { AiOutlineCheckCircle} from "react-icons/ai";
 import { AuthContext } from "../../utility/AuthProvider";
 import BookingModal from "../BookingModal/BookingModal";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,7 +21,7 @@ const CategoryProducts = () => {
   const products = useLoaderData();
   const [modalShow, setModalShow] = useState(false);
   const [product, setProduct] = useState([]);
-
+ 
   const handleReport = (data) => {
     axios({
       method: "post",
@@ -140,33 +141,41 @@ const CategoryProducts = () => {
 
                       <Card.Body>
                         <div className="d-flex justify-content-between">
-                          <Card.Title>{product.productName}</Card.Title>
-                          <Card.Title>$ {product.sellPrice}</Card.Title>
+                          <Card.Title className="fs-3">{product.productName}</Card.Title>
+                          <Card.Title className="fs-3">$ {product.sellPrice}</Card.Title>
                         </div>
-                        <Card.Text className="text-justify">
+                        <Card.Text className="text-justify font-size mt-3">
                           {product.description}
                         </Card.Text>
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between mt-3">
                           <div>
-                            <Card.Text>
-                              <strong>Location: </strong> {product.location}
+                            <Card.Text className="font-size fw-bold">
+                             Location: {product.location}
                             </Card.Text>
-                            <Card.Text>
-                              <strong>used of time: </strong> {product.used}
+                            <Card.Text className="font-size fw-bold">
+                              used of time: {product.used}
                             </Card.Text>
                           </div>
 
                           <div>
-                            <Card.Text>
-                              <strong>Original Price:</strong> $
-                              {product.originalPrice}
+                            <Card.Text className="font-size fw-bold">
+                             Original Price: $ {product.originalPrice}
                             </Card.Text>
-                            <Card.Text>
-                              <strong>{product.sellarName}</strong>
+                            <Card.Text className="font-size fw-bold text-center">
+                              {product.sellerName}
+                              {product.verified === 'true' ? (
+                                <>
+                                  <strong className="ms-2">
+                                  <AiOutlineCheckCircle className="fs-4  text-primary" />
+                                  </strong>
+                                </>
+                              ) : (
+                                <></>
+                              )}
                             </Card.Text>
                           </div>
                         </div>
-                        <div className="d-flex justify-content-around mt-4">
+                        <div className="d-flex justify-content-between mt-5">
                           <Button
                             variant="outline-primary"
                             onClick={() => {

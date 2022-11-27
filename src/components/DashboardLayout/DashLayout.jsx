@@ -9,7 +9,11 @@ const DashLayout = () => {
   const [isRole, setRole] = useState([]);
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/access/${user?.email}`)
+      fetch(`http://localhost:5000/access/${user?.email}`,{
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+        },
+      })
         .then((response) => response.json())
         .then((data) => {
 
@@ -40,7 +44,7 @@ const DashLayout = () => {
                     className="fs-5 text-center text-black"
                   >
                    Add a Product
-                  </Nav.Link>
+                  </Nav.Link>                  
                 </>
               )}
               {isRole ==='buyer' && (

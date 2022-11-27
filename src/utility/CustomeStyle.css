@@ -30,4 +30,6 @@ input::-webkit-inner-spin-button {
     height: 50px;
     border-radius: 50%;
   }
-  
+.font-size{
+  font-size: 18px;
+}

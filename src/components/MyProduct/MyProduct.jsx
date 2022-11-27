@@ -11,7 +11,12 @@ const MyProduct = () => {
     queryKey: ["MyProduct"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/sellerProduct?email=${user.email}`
+        `http://localhost:5000/sellerProduct?email=${user.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+          },
+        }
       );
       const data = await res.json();
       return data;
@@ -81,15 +86,29 @@ const MyProduct = () => {
                         <td className="text-center">{product.postedTime}</td>
                         <td className="text-center">{product.status}</td>
                         <td className="text-center">
-                          {product.addvertise === "true" ? (
-                            <p>product is advertising</p>
+                          {product.addvertise === "true" &&
+                          product.status !== "sold" ? (
+                            <p>product is advertised</p>
                           ) : (
-                            <Button
-                              variant="outline-primary"
-                              onClick={() => handleAdd(product)}
-                            >
-                              Advertise
-                            </Button>
+                            <>
+                              {product.status === "sold" ? (
+                                <></>
+                              ) : (
+                                <>
+                                  {product.status !== "sold" &&
+                                  product.addvertise !== "true" ? (
+                                    <Button
+                                      variant="outline-primary"
+                                      onClick={() => handleAdd(product)}
+                                    >
+                                      Advertise
+                                    </Button>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              )}
+                            </>
                           )}
                         </td>
                         <td className="text-center">
