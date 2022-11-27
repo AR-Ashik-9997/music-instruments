@@ -55,21 +55,31 @@ const Login = () => {
     signInGoogle(googleProvider)
       .then((res) => {
         setErrors({ ...errors, firebase: "" });
-        const user = res.user;               
-        axios({
-          method: "post",
-          url: "http://localhost:5000/AddRegister",
-          data: {
-            username: user.displayName,
-            photo: user.photoURL,
-            role: "buyer",
-            email: user.email,          
-          },
-        })
-          .then((response) => console.log(response))
-          .then(data=>{
+        const user = res.user;
+        fetch(`http://localhost:5000/checkRegister?email=${user.email}`)
+         .then((res) => res.json())
+         .then((data) => {
+          if(data.length>0){
             navigate(from, { replace: true });
-          });         
+          }
+          else{
+            axios({
+              method: "post",
+              url: "http://localhost:5000/AddRegister",
+              data: {
+                username: user.displayName,
+                photo: user.photoURL,
+                role: "buyer",
+                email: user.email,          
+              },
+            })
+              .then((response) => console.log(response))
+              .then(data=>{
+                navigate(from, { replace: true });
+              });
+          }
+         })               
+                 
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });

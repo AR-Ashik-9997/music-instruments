@@ -45,7 +45,7 @@ const AddProduct = () => {
     fetch(`http://localhost:5000/all-Category-data-find?name=${category}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.name === category) {
+        if (data.length>0) {
           axios({
             method: "post",
             url: "http://localhost:5000/AddProduct",

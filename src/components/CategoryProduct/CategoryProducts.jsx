@@ -11,6 +11,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, EffectFade } from "swiper";
 import toast, { Toaster } from "react-hot-toast";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 const CategoryProducts = () => {
   const notify = () => toast.success("Report Successfully sent.");
   const { user } = useContext(AuthContext);
@@ -30,8 +33,8 @@ const CategoryProducts = () => {
       },
     })
       .then((response) => console.log(response))
-      .then(()=>{
-        notify()
+      .then(() => {
+        notify();
       });
   };
 
@@ -123,11 +126,18 @@ const CategoryProducts = () => {
                 {products.map((product) => (
                   <Col lg={4} md={6} sm={12} key={product._id}>
                     <Card>
-                      <Card.Img
-                        variant="top"
-                        src={product.image}
-                        className="card-image"
-                      />
+                      <Link>
+                        <PhotoProvider>
+                          <PhotoView src={product.image}>
+                            <Card.Img
+                              variant="top"
+                              src={product.image}
+                              className="card-image"
+                            />
+                          </PhotoView>
+                        </PhotoProvider>
+                      </Link>
+
                       <Card.Body>
                         <div className="d-flex justify-content-between">
                           <Card.Title>{product.productName}</Card.Title>

@@ -43,7 +43,7 @@ const DashLayout = () => {
                   </Nav.Link>
                 </>
               )}
-              {isRole ==='' && (
+              {isRole ==='buyer' && (
                 <>
                   <Nav.Link
                     as={Link}
@@ -54,7 +54,7 @@ const DashLayout = () => {
                   </Nav.Link>                  
                 </>
               )}
-              {isRole ==='buyer' && (
+              {isRole ==='admin' && (
                 <>
                   <Nav.Link
                     as={Link}

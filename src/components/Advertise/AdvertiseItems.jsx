@@ -4,6 +4,9 @@ import { Button, Card, Col } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../utility/AuthProvider";
 import BookingModal from "../BookingModal/BookingModal";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 
 const AdvertiseItems = ({ data }) => {
   const {
@@ -41,7 +44,14 @@ const AdvertiseItems = ({ data }) => {
     <>
       <Col lg={4} md={6} sm={12}>
         <Card>
-          <Card.Img variant="top" src={image} className="card-image" />
+          <Link>
+            <PhotoProvider>
+              <PhotoView src={image}>
+                <Card.Img variant="top" src={image} className="card-image" />
+              </PhotoView>
+            </PhotoProvider>
+          </Link>
+
           <Card.Body>
             <div className="d-flex justify-content-between">
               <Card.Title>{productName}</Card.Title>
