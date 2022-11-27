@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 
 const MyOrder = () => {
   const { data: orderInfo = [] } = useQuery({
@@ -33,11 +36,23 @@ const MyOrder = () => {
                     {orderInfo.map((order) => (
                       <tr key={order._id}>
                         <td className="text-center">
-                          <img src={order.img} className="order-image" alt="" />
+                          <Link>
+                            <PhotoProvider>
+                              <PhotoView src={order.img}>
+                                <img
+                                  src={order.img}
+                                  className="order-image"
+                                  alt=""
+                                />
+                              </PhotoView>
+                            </PhotoProvider>
+                          </Link>
                         </td>
                         <td className="text-center">{order.productName}</td>
                         <td className="text-center ">$ {order.sellPrice}</td>
-                        <td className="text-center"><Button variant="outline-primary">Payment</Button></td>
+                        <td className="text-center">
+                          <Button variant="outline-primary">Payment</Button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>

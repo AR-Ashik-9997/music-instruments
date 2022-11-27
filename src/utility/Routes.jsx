@@ -15,6 +15,8 @@ import SellerInformation from "../components/Admin/SellerInformation";
 import AllBuyerInfo from "../components/Admin/AllBuyerInfo";
 import ReportedInfo from "../components/Admin/ReportedInfo";
 import Dashboard from "../components/DashboardLayout/Dashboard";
+import AdminRoute from "../components/PrivateRoute/AdminRoute";
+import SellerRoute from "../components/PrivateRoute/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -45,13 +47,13 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/dashboard", element: <Dashboard /> },
-      { path: "/dashboard/myProduct", element: <MyProduct /> },
-      { path: "/dashboard/addProduct", element: <AddProduct /> },
+      { path: "/dashboard/myProduct", element: <SellerRoute><MyProduct /></SellerRoute>},
+      { path: "/dashboard/addProduct", element:<SellerRoute> <AddProduct /></SellerRoute> },
       { path: "/dashboard/myBuyer", element: <MyBuyers /> },
       { path: "/dashboard/myOrder", element: <MyOrder /> },
-      { path: "/dashboard/all-seller", element: <SellerInformation /> },
-      { path: "/dashboard/all-buyer", element: <AllBuyerInfo /> },
-      { path: "/dashboard/reported-info", element: <ReportedInfo /> },
+      { path: "/dashboard/all-seller", element: <AdminRoute><SellerInformation /></AdminRoute> },
+      { path: "/dashboard/all-buyer", element: <AdminRoute><AllBuyerInfo /></AdminRoute> },
+      { path: "/dashboard/reported-info", element: <AdminRoute><ReportedInfo /></AdminRoute> },
     ],
   },
 ]);

@@ -112,17 +112,8 @@ const AddProduct = () => {
   return (
     <div className="home-container">
       <Container className="top-margin">
-        <Row>
-          <Col lg={5} md={6} sm={12}>
-            <div className="mt-5">
-              <img
-                src="https://simpleplans.com.au/img/content_writing-banner.png"
-                alt=""
-                className=" img-fluid"
-              />
-            </div>
-          </Col>
-          <Col lg={7} md={6} sm={12}>
+        <Row>          
+          <Col lg={12} md={12} sm={12}>
             <div className="bg-white rounded-4 mx-auto mt-5 mb-5">
               <h1 className="text-center mb-4 pt-5">Add Product</h1>
               <Form className="mx-auto w-75" onSubmit={handleSubmit}>
@@ -149,7 +140,8 @@ const AddProduct = () => {
                 <Form.Group className="mb-4" controlId="formBasicprice">
                   <Form.Control
                     name="sellPrice"
-                    type="text"
+                    type="number"
+                    step="any"
                     placeholder="Sell Price"
                     className="rounded-3"
                     autoComplete="off"
@@ -165,7 +157,8 @@ const AddProduct = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicphone">
                   <Form.Control
-                    type="tel"
+                    type="number"
+                    step="any"
                     placeholder="Phone"
                     name="phone"
                     required
@@ -198,6 +191,7 @@ const AddProduct = () => {
                   <Form.Control
                     type="number"
                     placeholder="Original Price"
+                    step="any"
                     name="originalPrice"
                     required
                     autoComplete="off"
