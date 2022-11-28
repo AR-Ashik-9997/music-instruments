@@ -35,6 +35,10 @@ input::-webkit-inner-spin-button {
 }
 .error-image{
   width: 80%;
-  padding-top: 5rem;
-  
+  padding-top: 5rem;  
+}
+
+.bg-background{
+  background: linear-gradient(90deg, #202d31, #202f32, #213032, #223232, #233332, #243432, #263631, #283731);
+  background-repeat: no-repeat;
 }

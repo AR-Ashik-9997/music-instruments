@@ -14,9 +14,9 @@ const Header = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <Navbar className="navbar sticky-top" bg="light" expand="lg">
+    <Navbar className="navbar" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/" className="fs-2">
+        <Navbar.Brand as={Link} to="/" className="fs-2 fw-bold">
         <img
             src="https://i.postimg.cc/jjQKCrSz/pngwing-com.png"
             className="d-inline-block align-center me-3"
@@ -63,7 +63,7 @@ const Header = () => {
               <div className="d-flex align-items-center d-grid gap-3 d-block">
                 <Button
                   onClick={handleSignOut}
-                  variant="outline-primary btn-md"
+                  variant="dark btn-md"
                 >
                   Sign-Out
                 </Button>

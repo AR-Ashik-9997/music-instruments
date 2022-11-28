@@ -41,13 +41,13 @@ const Home = () => {
               className="d-flex flex-column align-items-center justify-content-center"
             >
               <div className="mt-5">
-                <h1>Choose Our Top Picks Music Instruments</h1>
-                <p className="w-75 text-justify mt-4">
+                <h1 className="fs-1">Choose Our Top Picks Music Instruments</h1>
+                <p className="w-75 text-justify mt-4 fs-5">
                   It's easy to play any musical instrument: all you have to do
                   is touch the right key at the right time and the instrument
-                  will play itself
+                  will play itself.
                 </p>
-                <Button className="mt-4">Shop Now</Button>
+                <Button variant="dark" className="mt-4 bt-lg">Shop Now</Button>
               </div>
             </Col>
             <Col
@@ -210,7 +210,7 @@ const Home = () => {
                     aria-label="Search"
                   />
                   <div>
-                    <Button variant="outline-primary" className="btn-md">
+                    <Button variant="dark" className="btn-md">
                       Join<span className="ms-2"></span>Now
                     </Button>
                   </div>

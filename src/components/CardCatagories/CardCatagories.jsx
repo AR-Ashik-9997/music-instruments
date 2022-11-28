@@ -9,7 +9,7 @@ const CardCatagories = ({ data }) => {
         <Card.Body>                   
           <div className="d-flex justify-content-center">
             <Link to={`/category/${data.categoryId}`}>
-              <Button variant="outline-primary">View Product</Button>
+              <Button variant="dark" className="bg-black">View Product</Button>
             </Link>
           </div>          
         </Card.Body>
