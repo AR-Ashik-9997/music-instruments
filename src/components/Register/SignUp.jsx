@@ -4,8 +4,10 @@ import * as EmailValidator from "email-validator";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
+import useTitle from "../../utility/TitleHooks";
 
 const SignUp = () => {
+  useTitle("Sign Up");
   const { signUp, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");

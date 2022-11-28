@@ -3,9 +3,11 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
+import useTitle from "../../utility/TitleHooks";
 import { AuthContext } from "./../../utility/AuthProvider";
 
 const MyOrder = () => {
+  useTitle("All Order Info");
   const { user, Logout } = useContext(AuthContext);
   const [orderInfo, setOrderInfo] = useState([]);
   const [Pay, setPay] = useState([]);

@@ -3,10 +3,12 @@ import { useLoaderData } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "./CheckOutForm";
+import useTitle from "../../utility/TitleHooks";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const Payment = () => {
+  useTitle("Check Out");
   const booking = useLoaderData();
 
   return (

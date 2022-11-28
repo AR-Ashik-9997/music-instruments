@@ -16,19 +16,19 @@ const Header = () => {
   return (
     <Navbar className="navbar sticky-top" bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" className="fs-2">
           Music-Instruments
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-          <Nav.Link as={Link} to="/">
+          <Nav.Link as={Link} to="/" className="fs-5">
               Home
             </Nav.Link>            
-            <Nav.Link as={Link} to="/dashboard">
+            <Nav.Link as={Link} to="/dashboard" className="fs-5">
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/blogs">
+            <Nav.Link as={Link} to="/blogs" className="fs-5">
               Blog
             </Nav.Link>
             

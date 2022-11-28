@@ -3,7 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import useTitle from "../../utility/TitleHooks";
 const AllBuyerInfo = () => {
+  useTitle("All Buyer Info");
   const notify = () => toast.success("Delete Successful.");
   const { data: buyerData = [], refetch } = useQuery({
     queryKey: ["buyerData"],

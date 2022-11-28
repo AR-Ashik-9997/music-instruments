@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../utility/AuthProvider";
+import useTitle from "../../utility/TitleHooks";
 const Dashboard = () => {
+  useTitle("Dashboard");
   const {user}= useContext(AuthContext);
   return (
     <div>

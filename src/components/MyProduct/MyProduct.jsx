@@ -4,7 +4,9 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../utility/AuthProvider";
+import useTitle from "../../utility/TitleHooks";
 const MyProduct = () => {
+  useTitle("Product Info");
   const { user } = useContext(AuthContext);
   const notify = () => toast.success("Delete Successful.");
   const { data: MyProduct = [], refetch } = useQuery({

@@ -5,8 +5,10 @@ import CardCatagories from "./../CardCatagories/CardCatagories";
 import { useQuery } from "@tanstack/react-query";
 import { AiOutlineStar,AiFillStar} from "react-icons/ai";
 import AdvertiseItems from "../Advertise/AdvertiseItems";
+import useTitle from './../../utility/TitleHooks';
 
 const Home = () => {
+  useTitle("Music Instruments");
   const { data: catagoriesData = [] } = useQuery({
     queryKey: ["catagoriesData"],
     queryFn: async () => {

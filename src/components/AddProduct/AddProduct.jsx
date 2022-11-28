@@ -36,10 +36,10 @@ const AddProduct = () => {
     const originalPrice = form.originalPrice.value;
     const description = form.description.value;
     const used = form.used.value;
-    const currentTime = new Date().toLocaleString("en-US", {
-      year: "numeric",
-      month: "numeric",
+    const currentDate = new Date().toLocaleString("en-US", {
       day: "numeric",
+      month: "long",
+      year: "numeric",
     });
 
     fetch(`http://localhost:5000/all-Category-data-find?name=${category}`)
@@ -63,7 +63,7 @@ const AddProduct = () => {
               originalPrice: originalPrice,
               description: description,
               used: used,
-              postedTime: currentTime,
+              date: currentDate,
               status: "Available",
               verified: "false",
               addvertise: "false",
@@ -90,7 +90,7 @@ const AddProduct = () => {
               originalPrice: originalPrice,
               description: description,
               used: used,
-              postedTime: currentTime,
+              date: currentDate,
               status: "Available",
               verified: "false",
               addvertise: "false",

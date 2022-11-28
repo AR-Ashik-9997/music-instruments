@@ -8,8 +8,10 @@ import { BiLogInCircle } from "react-icons/bi";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
 import axios from "axios";
+import useTitle from './../../utility/TitleHooks';
 
 const Login = () => {
+  useTitle("Sign In");
   const navigate = useNavigate();
   const { signInGoogle, SignInForm, signInGithub } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();

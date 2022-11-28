@@ -4,8 +4,10 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../utility/AuthProvider";
+import useTitle from "../../utility/TitleHooks";
 
 const SellerInformation = () => {
+  useTitle("All Seller Info");
   const { Logout } = useContext(AuthContext);
   const notify = () => toast.success("Delete Successful.");
   const { data: sellerInfo = [], refetch } = useQuery({

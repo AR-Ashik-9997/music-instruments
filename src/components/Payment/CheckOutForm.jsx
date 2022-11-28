@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button } from "react-bootstrap";
+
 const CheckOutForm = ({ data }) => {
+
   const [cardError, setCardError] = useState([]);
   const [success, setSuccess] = useState("");
   const [processing, setProcessing] = useState(false);
