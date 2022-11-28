@@ -17,6 +17,13 @@ const Header = () => {
     <Navbar className="navbar sticky-top" bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fs-2">
+        <img
+            src="https://i.postimg.cc/jjQKCrSz/pngwing-com.png"
+            className="d-inline-block align-center me-3"
+            width="50"
+            height="50"
+            alt=""
+          />
           Music-Instruments
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
