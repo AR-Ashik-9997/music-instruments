@@ -8,6 +8,7 @@ import { AuthContext } from "../../utility/AuthProvider";
 const SignUp = () => {
   const { signUp, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState("");
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -17,6 +18,22 @@ const SignUp = () => {
     password: "",
     firebase: "",
   });
+  const handleImage = (event) => {
+    const img = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", img);
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          setImageUrl(imgData.data.url);
+        }
+      });
+  };
   const handleEmailChange = (e) => {
     const email = e.target.value;
     if (!EmailValidator.validate(email)) {
@@ -58,14 +75,14 @@ const SignUp = () => {
     event.preventDefault();
     const form = event.target;
     const username = form.username.value;
-    const photo = form.photoUrl.value;
+    const photo = imageUrl
     const role = form.role.value;
     const email = userInfo.email;
-    const password = userInfo.password;     
-    
-      signUp(email, password)
+    const password = userInfo.password;
+
+    signUp(email, password)
       .then((res) => {
-        handleupdateProfile(username, photo);       
+        handleupdateProfile(username, photo);
         setErrors({ ...errors, firebase: "" });
         const currentUser = {
           email: email,
@@ -101,8 +118,8 @@ const SignUp = () => {
                       username: username,
                       photo: photo,
                       role: role,
-                      email: email,                     
-                      verified:"false",
+                      email: email,
+                      verified: "false",
                     },
                   })
                     .then((response) => console.log(response))
@@ -111,8 +128,7 @@ const SignUp = () => {
                   navigate("/");
                 }
               });
-          });    
-         
+          });
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });
@@ -158,14 +174,15 @@ const SignUp = () => {
                   autoComplete="off"
                 />
               </Form.Group>
-              <Form.Group className="mb-4" controlId="formBasicphoto">
+              <Form.Group className="mb-4" controlId="formBasicphoto">              
                 <Form.Control
-                  name="photoUrl"
-                  type="text"
-                  placeholder="Photo-URL"
+                  name="image"
+                  type="file"                  
                   className="rounded-3"
-                  required
                   autoComplete="off"
+                  onChange={handleImage}
+                  required
+                  
                 />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicRole">

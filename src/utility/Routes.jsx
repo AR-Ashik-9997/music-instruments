@@ -17,12 +17,15 @@ import Dashboard from "../components/DashboardLayout/Dashboard";
 import AdminRoute from "../components/PrivateRoute/AdminRoute";
 import SellerRoute from "../components/PrivateRoute/SellerRoute";
 import Payment from "../components/Payment/Payment";
+import ErrorPage from "./ErrorPage";
+import Blogs from "../components/Blog/Blogs";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement:<ErrorPage/>,
     children: [
       { path: "/", element: <Home /> },
       {
@@ -35,6 +38,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/cardProduct/${params.id}`),
       },
+      { path: "/blogs", element: <Blogs /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/signIn", element: <Login /> },
     ],
@@ -46,6 +50,7 @@ const router = createBrowserRouter([
         <DashLayout />
       </PrivateRoute>
     ),
+    errorElement:<ErrorPage/>,
     children: [
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/myProduct", element: <SellerRoute><MyProduct /></SellerRoute>},
