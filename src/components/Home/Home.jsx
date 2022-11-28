@@ -58,7 +58,7 @@ const Home = () => {
               className="d-flex flex-column align-items-center justify-content-center "
             >
               <img
-                src="https://i.ibb.co/Drd787T/banner.png"
+                src="https://i.ibb.co/6WVHjRh/banner.png"
                 alt=""
                 className="img-fluid mx-auto d-block"
               />
