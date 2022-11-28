@@ -12,9 +12,9 @@ const ErrorPage = () => {
           className="d-block mx-auto error-image "
         />
       </div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center pb">
         <Link to="/">
-          <Button variant="outline-info">Go Home</Button>
+          <Button variant="dark">Go Home</Button>
         </Link>
       </div>
     </>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 const CheckOutForm = ({ data }) => {
 
@@ -82,7 +82,7 @@ const CheckOutForm = ({ data }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          console.log(data)          
           if (data.insertedId) {
             setSuccess("Congrats! your payment completed");
             setTransactionId(paymentIntent.id);
@@ -90,7 +90,8 @@ const CheckOutForm = ({ data }) => {
         });
     }
     setProcessing(false);
-  };
+
+  };  
   return (
     <div className="pb">
       <form onSubmit={handleSubmit}>
@@ -114,7 +115,8 @@ const CheckOutForm = ({ data }) => {
           <Button
             variant="dark"
             type="submit"
-            className="w-75"
+            className="w-25"
+            
             disabled={!stripe || !clientSecret || processing}
           >
             Pay

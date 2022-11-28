@@ -210,7 +210,7 @@ console.log(products);
               />
             </>
           ) : (
-            <h1 className="text-center mt-5 mb-5">No Data available</h1>
+            <h1 className="text-center mt-5 mb-5">No products are available</h1>
           )}
         </Container>
         <Toaster />

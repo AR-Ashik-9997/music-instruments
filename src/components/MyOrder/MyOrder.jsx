@@ -11,7 +11,7 @@ const MyOrder = () => {
   const [loading, setLoading] = useState(true);
   const { user, Logout } = useContext(AuthContext);
   const [orderInfo, setOrderInfo] = useState([]);
-  const [Pay, setPay] = useState([]);
+
   useEffect(() => {
     fetch(`https://music-data-six.vercel.app/orderInfo?email=${user?.email}`, {
       headers: {
@@ -26,22 +26,11 @@ const MyOrder = () => {
         return response.json();
       })
       .then((data) => {
-        setOrderInfo(data)
+        setOrderInfo(data);
         setLoading(false);
       });
   }, [user?.email, Logout]);
 
-  useEffect(() => {
-    fetch(`https://music-data-six.vercel.app/checkpayment?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setPay(data);
-      });
-  }, [user?.email]);
   if (loading) {
     return (
       <div className="d-flex justify-content-center">
@@ -57,13 +46,19 @@ const MyOrder = () => {
             {orderInfo.length > 0 ? (
               <>
                 <h1 className="text-center mb-5">My Order</h1>
-                <Table striped bordered hover responsive className="bg-background">
+                <Table
+                  striped
+                  bordered
+                  hover
+                  responsive
+                  className="bg-background"
+                >
                   <thead>
                     <tr>
                       <th className="text-center">Image</th>
                       <th className="text-center">Preoduct Name</th>
                       <th className="text-center">price</th>
-                      <th className="text-center">Payment</th>
+                      <th className="text-center">Payment</th>                     
                     </tr>
                   </thead>
                   <tbody>
@@ -83,16 +78,14 @@ const MyOrder = () => {
                           </Link>
                         </td>
                         <td className="text-center">{order.productName}</td>
-                        <td className="text-center ">$ {order.sellPrice}</td>
+                        <td className="text-center ">$ {order.sellPrice}</td>                      
                         <td className="text-center">
-                          {Pay.email ? (
+                          {order.status === "sold" ? (
                             <p>paid</p>
                           ) : (
-                            <>
-                              <Link to={`/dashboard/payment/${order._id}`}>
-                                <Button variant="outline-primary">Pay</Button>
-                              </Link>
-                            </>
+                            <Link to={`/dashboard/payment/${order._id}`}>
+                              <Button variant="dark">Pay</Button>
+                            </Link>
                           )}
                         </td>
                       </tr>

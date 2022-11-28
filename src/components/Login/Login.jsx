@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { BsGithub } from "react-icons/bs";
 import { Button, Col, Container, Form, Row} from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as EmailValidator from "email-validator";
-import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
 import axios from "axios";
 import useTitle from './../../utility/TitleHooks';
@@ -12,9 +11,9 @@ import useTitle from './../../utility/TitleHooks';
 const Login = () => {
   useTitle("Sign In");
   const navigate = useNavigate();
-  const { signInGoogle, SignInForm, signInGithub } = useContext(AuthContext);
+  const { signInGoogle, SignInForm} = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
+
   const location = useLocation();
   const from = location.state?.from?.pathname || "/"; 
   const [userInfo, setUserInfo] = useState({
@@ -104,16 +103,7 @@ const Login = () => {
         setErrors({ ...errors, firebase: error.message });
       });
   };
-  const GithubSignIn = () => {
-    signInGithub(githubProvider)
-      .then(() => {
-        setErrors({ ...errors, firebase: "" });
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        setErrors({ ...errors, firebase: error.message });
-      });
-  };
+
   return (
     <Container className="pb">      
       <Row>
@@ -176,14 +166,7 @@ const Login = () => {
             <div className="d-flex justify-content-center mb-5">
               <Button variant="outline-dark" onClick={googleSignIn}>
                 <FcGoogle className="fs-1" />
-              </Button>
-              <Button
-                variant="outline-dark"
-                className="ms-4"
-                onClick={GithubSignIn}
-              >
-                <BsGithub className="fs-1" />
-              </Button>
+              </Button>              
             </div>
           </div>
         </Col>

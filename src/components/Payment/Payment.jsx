@@ -15,10 +15,10 @@ const Payment = () => {
 
   return (
     <Container className="pb mt-5">
-      <Row>
+      <Row className="g-5">
         <h1 className="text-center mt-5">Payment Information</h1>        
         <Col lg={6} md={12} sm={12} className=" mt-5">
-          <div className="mx-auto w-50 mt-2">
+          <div className="mx-auto  mt-2">
             <div>
               <Elements stripe={stripePromise}>
                 <CheckOutForm data={booking} />
@@ -27,7 +27,7 @@ const Payment = () => {
           </div>
         </Col>
         <Col lg={6} md={12} sm={12} className="mt-5">
-          <Table>
+          <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th className="text-center">Prduct Name</th>
