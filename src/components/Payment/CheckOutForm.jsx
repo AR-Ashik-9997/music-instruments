@@ -92,16 +92,16 @@ const CheckOutForm = ({ data }) => {
     setProcessing(false);
   };
   return (
-    <>
+    <div className="pb">
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
               base: {
-                fontSize: "16px",
+                fontSize: "20px",
                 color: "#424770",
                 "::placeholder": {
-                  color: "#aab7c4",
+                  color: "#1B0803",
                 },
               },
               invalid: {
@@ -110,24 +110,27 @@ const CheckOutForm = ({ data }) => {
             },
           }}
         />
-        <Button
-          variant="outline-info"
-          type="submit"
-          disabled={!stripe || !clientSecret || processing}
-        >
-          Pay
-        </Button>
+        <div className="d-flex justify-content-center mt-5">
+          <Button
+            variant="dark"
+            type="submit"
+            className="w-75"
+            disabled={!stripe || !clientSecret || processing}
+          >
+            Pay
+          </Button>
+        </div>
       </form>
       <p className="text-danger">{cardError}</p>
       {success && (
         <div>
-          <p className="text-success-500">{success}</p>
+          <p className="text-success">{success}</p>
           <p>
             Your transactionId: <span className="fw-bold">{transactionId}</span>
           </p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

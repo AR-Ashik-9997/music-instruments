@@ -3,7 +3,11 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { v4 } from "uuid";
 import { AuthContext } from "../../utility/AuthProvider";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
+  const notify = () => toast.success("Add Successfully.");
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [imageUrl, setImageUrl] = useState("");
   const handleImage = (event) => {
@@ -42,9 +46,11 @@ const AddProduct = () => {
       year: "numeric",
     });
 
-    fetch(`https://music-data-six.vercel.app/all-Category-data-find?name=${category}`)
+    fetch(
+      `https://music-data-six.vercel.app/all-Category-data-find?name=${category}`
+    )
       .then((res) => res.json())
-      .then((data) => {               
+      .then((data) => {
         if (data.length > 0) {
           axios({
             method: "post",
@@ -70,8 +76,11 @@ const AddProduct = () => {
             },
           })
             .then((response) => console.log(response))
-            .then({});
+            .then((data) => {
+              notify();
+            });
           form.reset();
+          navigate("/dashboard/myProduct");
         } else {
           axios({
             method: "post",
@@ -108,15 +117,18 @@ const AddProduct = () => {
             },
           })
             .then((response) => console.log(response))
-            .then({});
+            .then((data) => {
+              notify();
+            });
           form.reset();
+          navigate('/dashboard/myProduct');
         }
       });
   };
   return (
     <div>
       <Container className="top-margin">
-        <Row>          
+        <Row>
           <Col lg={12} md={12} sm={12}>
             <div className="bg-background w-75 rounded-4 mx-auto mt-5 mb-5">
               <h1 className="text-center mb-4 pt-5">Add Product</h1>
@@ -242,6 +254,7 @@ const AddProduct = () => {
           </Col>
         </Row>
       </Container>
+      <Toaster />
     </div>
   );
 };

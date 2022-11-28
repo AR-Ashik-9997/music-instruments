@@ -48,7 +48,7 @@ const Home = () => {
                   is touch the right key at the right time and the instrument
                   will play itself.
                 </p>
-                <Link to="/"><Button variant="dark" className="mt-4 bt-lg">Shop Now</Button></Link>
+                <Link to="/"><Button variant="dark" className="mt-4 btn-lg">Shop Now</Button></Link>
               </div>
             </Col>
             <Col

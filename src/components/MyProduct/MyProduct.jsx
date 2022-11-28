@@ -62,8 +62,8 @@ const MyProduct = () => {
           <div className="mt-5 mb-5 bg-background">
             {MyProduct.length > 0 ? (
               <>
-                <h1 className="text-center mb-5">My Product</h1>
-                <Table striped bordered hover responsive >
+                <h1 className="text-center mb-4 pt-3 ">My Product</h1>
+                <Table striped bordered hover responsive>
                   <thead>
                     <tr>
                       <th className="text-center">Product Name</th>
@@ -85,7 +85,7 @@ const MyProduct = () => {
                         <td className="text-center">
                           $ {product.originalPrice}
                         </td>
-                        <td className="text-center">{product.postedTime}</td>
+                        <td className="text-center">{product.date}</td>
                         <td className="text-center">{product.status}</td>
                         <td className="text-center">
                           {product.addvertise === "true" &&
@@ -100,7 +100,7 @@ const MyProduct = () => {
                                   {product.status !== "sold" &&
                                   product.addvertise !== "true" ? (
                                     <Button
-                                      variant="outline-primary"
+                                      variant="dark"
                                       onClick={() => handleAdd(product)}
                                     >
                                       Advertise

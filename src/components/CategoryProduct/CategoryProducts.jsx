@@ -59,7 +59,7 @@ console.log(products);
                   is touch the right key at the right time and the instrument
                   will play itself
                 </p>
-                <Button className="mt-4">Shop Now</Button>
+                <Link to="/"><Button variant="dark" className="mt-4 btn-lg">Shop Now</Button></Link>
               </div>
             </Col>
             <Col lg={6} md={12} sm={12}>
@@ -146,6 +146,9 @@ console.log(products);
                           <Card.Title className="fs-3">{product.productName}</Card.Title>
                           <Card.Title className="fs-3">$ {product.sellPrice}</Card.Title>
                         </div>
+                        <Card.Text className="font-size mt-3 fw-bold">
+                         Date: {product.date}
+                        </Card.Text>
                         <Card.Text className="text-justify font-size mt-3">
                           {product.description.substr(0, 250)}
                         </Card.Text>
@@ -156,7 +159,7 @@ console.log(products);
                             </Card.Text>
                             <Card.Text className="font-size fw-bold">
                               used of time: {product.used}
-                            </Card.Text>
+                            </Card.Text>                            
                           </div>
 
                           <div>
@@ -177,7 +180,7 @@ console.log(products);
                             </Card.Text>
                           </div>
                         </div>
-                        <div className="d-flex justify-content-between mt-5">
+                        <div className="d-flex justify-content-between mt-4 mb-3">
                           <Button
                             variant="dark"
                             onClick={() => {
@@ -188,7 +191,7 @@ console.log(products);
                             Book Now
                           </Button>
                           <Button
-                            variant="outline-primary"
+                            variant="dark"
                             onClick={() => handleReport(product)}
                           >
                             Report to Admin

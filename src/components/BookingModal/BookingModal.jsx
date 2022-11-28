@@ -14,7 +14,7 @@ const handleSubmit = (event) => {
   const form = event.target;
   const phone = form.phone.value;
   const location = form.location.value;
-  const usename = form.username.value;
+  const username = form.username.value;
   const email = form.email.value;
   axios({
     method: "post",
@@ -22,7 +22,7 @@ const handleSubmit = (event) => {
     data: {
       productId: _id,
       buyerEmail: email,
-      usename: usename,
+      username: username,
       location: location,
       phone: phone,
       img: image,

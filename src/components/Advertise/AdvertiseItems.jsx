@@ -18,6 +18,7 @@ const AdvertiseItems = ({ data }) => {
     used,
     originalPrice,
     sellerName,
+    date
   } = data;
   const notify = () => toast.success("Report Successfully sent.");
   const { user } = useContext(AuthContext);
@@ -43,7 +44,7 @@ const AdvertiseItems = ({ data }) => {
   return (
     <>
       <Col lg={4} md={6} sm={12}>
-        <Card>
+        <Card className="bg-background">
           <Link>
             <PhotoProvider>
               <PhotoView src={image}>
@@ -54,32 +55,33 @@ const AdvertiseItems = ({ data }) => {
 
           <Card.Body>
             <div className="d-flex justify-content-between">
-              <Card.Title>{productName}</Card.Title>
-              <Card.Title>$ {sellPrice}</Card.Title>
+              <Card.Title className="fs-3">{productName}</Card.Title>
+              <Card.Title className="fs-3">$ {sellPrice}</Card.Title>
             </div>
-            <Card.Text className="text-justify">{description.substr(0, 250)}</Card.Text>
+            <Card.Text className="font-size mt-3 fw-bold">{date}</Card.Text>
+            <Card.Text className=" text-justify font-size mt-3">{description.substr(0, 250)}</Card.Text>
             <div className="d-flex justify-content-between">
               <div>
-                <Card.Text>
-                  <strong>Location: {location}</strong>
+              <Card.Text className="font-size fw-bold">
+                  Location: {location}
                 </Card.Text>
-                <Card.Text>
-                  <strong>used of time: {used}</strong>
+                <Card.Text className="font-size fw-bold">
+                  used of time: {used}
                 </Card.Text>
               </div>
 
               <div>
-                <Card.Text>
-                  <strong>Original Price: ${originalPrice}</strong>
+              <Card.Text className="font-size fw-bold">
+                 Original Price: ${originalPrice}
                 </Card.Text>
-                <Card.Text>
-                  <strong>{sellerName}</strong>
+                <Card.Text className="font-size fw-bold">
+                  {sellerName}
                 </Card.Text>
               </div>
             </div>
-            <div className="d-flex justify-content-around mt-4">
+            <div className="d-flex justify-content-between mt-4 mb-3">
               <Button
-                variant="outline-primary"
+                variant="dark"
                 onClick={() => {
                   setModalShow(true);
                   setProduct(data);
@@ -88,7 +90,7 @@ const AdvertiseItems = ({ data }) => {
                 Book Now
               </Button>
               <Button
-                variant="outline-primary"
+                variant="dark"
                 onClick={() => handleReport(data)}
               >
                 Report to Admin
