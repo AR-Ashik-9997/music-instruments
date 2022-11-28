@@ -81,38 +81,39 @@ const SignUp = () => {
     const role = form.role.value;
     const email = userInfo.email;
     const password = userInfo.password;
-
-    signUp(email, password)
-      .then((res) => {
-        handleupdateProfile(username, photo);
-        setErrors({ ...errors, firebase: "" });
-        const currentUser = {
-          email: email,
-        };
-
-        fetch("https://music-data-six.vercel.app/jwt ", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
-        })
-          .then((response) => response.json())
+const currentUser = {
+  email: email,
+}
+    fetch("https://music-data-six.vercel.app/jwt ", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentUser),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("secret-token", data.token);
+        fetch(
+          `https://music-data-six.vercel.app/checkRegister?email=${email}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+            },
+          }
+        )
+          .then((res) => res.json())
           .then((data) => {
-            localStorage.setItem("secret-token", data.token);
-            fetch(`https://music-data-six.vercel.app/checkRegister?email=${email}`, {
-              headers: {
-                authorization: `Bearer ${localStorage.getItem("secret-token")}`,
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.length > 0) {
-                  setErrors({
-                    ...errors,
-                    email: "user is exist. please try another email.",
-                  });
-                } else {
+            if (data.length > 0) {
+              setErrors({
+                ...errors,
+                email: "user is exist. please try another email.",
+              });
+            } else {
+              signUp(email, password)
+                .then((res) => {
+                  handleupdateProfile(username, photo);
+                  setErrors({ ...errors, firebase: "" });
                   axios({
                     method: "post",
                     url: "https://music-data-six.vercel.app/AddRegister",
@@ -125,16 +126,18 @@ const SignUp = () => {
                     },
                   })
                     .then((response) => console.log(response))
-                    .then((data) => {});
-                  form.reset();
-                  navigate("/");
-                }
-              });
+                    .then((data) => {
+                      form.reset();
+                      navigate("/");
+                    });
+                })
+                .catch((error) => {
+                  setErrors({ ...errors, firebase: error.message });
+                });
+            }
           });
-      })
-      .catch((error) => {
-        setErrors({ ...errors, firebase: error.message });
       });
+    
   };
   const handleupdateProfile = (name, photoUrl) => {
     const profile = {
