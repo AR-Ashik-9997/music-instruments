@@ -4,7 +4,6 @@ import { BsGithub } from "react-icons/bs";
 import { Button, Col, Container, Form, Row} from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as EmailValidator from "email-validator";
-import { BiLogInCircle } from "react-icons/bi";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
 import axios from "axios";
@@ -116,7 +115,7 @@ const Login = () => {
       });
   };
   return (
-    <Container className="home-container">      
+    <Container className="pb">      
       <Row>
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
@@ -128,7 +127,7 @@ const Login = () => {
           </div>
         </Col>
         <Col lg={6} md={6} sm={12} className="d-flex align-items-center pt-5">
-          <div className="bg-white w-75 rounded-4 mx-auto mt-5 mb-5">
+          <div className="bg-background w-75 rounded-4 mx-auto mt-5 mb-5">
             <h1 className="text-center mb-4 pt-5">Sign-In</h1>
             <Form className="mx-auto w-75" onSubmit={handleSubmit}>
               <Form.Group className="mb-4" controlId="formBasicEmail">
@@ -156,11 +155,11 @@ const Login = () => {
               </Form.Group>
               <div className="d-flex justify-content-center">
                 <Button
-                  variant="outline-info"
+                  variant="dark"
                   type="submit"
                   className="w-50  mb-4 rounded-3"               
                 >
-                  Sign-In <BiLogInCircle className="fs-5" />
+                  Sign-In
                 </Button>
               </div>
             </Form>

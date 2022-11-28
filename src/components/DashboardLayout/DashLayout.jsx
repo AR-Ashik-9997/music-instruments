@@ -3,20 +3,20 @@ import { Col, Container, Nav, Row } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
 import Header from "../Header/Header";
+import Footer from "./../Footer/Footer";
 
 const DashLayout = () => {
   const { user } = useContext(AuthContext);
   const [isRole, setRole] = useState([]);
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/access/${user?.email}`,{
+      fetch(`http://localhost:5000/access/${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("secret-token")}`,
         },
       })
         .then((response) => response.json())
         .then((data) => {
-
           setRole(data.role);
         });
     }
@@ -25,11 +25,11 @@ const DashLayout = () => {
   return (
     <div>
       <Header />
-      <Container>
+      <Container className="pb">
         <Row>
           <Col lg={2} md={2}>
             <Nav>
-              {isRole ==='seller' && (
+              {isRole === "seller" && (
                 <>
                   <Nav.Link
                     as={Link}
@@ -43,11 +43,11 @@ const DashLayout = () => {
                     to="/dashboard/addProduct"
                     className="fs-5 text-center text-black"
                   >
-                   Add a Product
-                  </Nav.Link>                  
+                    Add a Product
+                  </Nav.Link>
                 </>
               )}
-              {isRole ==='buyer' && (
+              {isRole === "buyer" && (
                 <>
                   <Nav.Link
                     as={Link}
@@ -55,10 +55,10 @@ const DashLayout = () => {
                     className="fs-5 text-center text-black"
                   >
                     My Order
-                  </Nav.Link>                  
+                  </Nav.Link>
                 </>
               )}
-              {isRole ==='admin' && (
+              {isRole === "admin" && (
                 <>
                   <Nav.Link
                     as={Link}
@@ -66,30 +66,31 @@ const DashLayout = () => {
                     className="fs-5 text-center text-black"
                   >
                     All Seller
-                  </Nav.Link>                  
+                  </Nav.Link>
                   <Nav.Link
                     as={Link}
                     to="/dashboard/all-buyer"
                     className="fs-5 text-center text-black"
                   >
                     All Buyer
-                  </Nav.Link>                  
+                  </Nav.Link>
                   <Nav.Link
                     as={Link}
                     to="/dashboard/reported-info"
                     className="fs-5 text-center text-black"
                   >
                     Reported info
-                  </Nav.Link>                  
+                  </Nav.Link>
                 </>
               )}
             </Nav>
           </Col>
           <Col lg={10} md={10}>
-            <Outlet />
-          </Col>
+            <Outlet />            
+          </Col>          
         </Row>
       </Container>
+      <Footer/>
     </div>
   );
 };

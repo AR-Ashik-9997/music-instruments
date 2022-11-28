@@ -54,7 +54,7 @@ console.log(products);
             >
               <div className="mt-5">
                 <h1>Choose Our Top Picks Music Instruments</h1>
-                <p className="w-75 text-justify mt-4">
+                <p className="w-75 text-justify mt-4 fs-5">
                   It's easy to play any musical instrument: all you have to do
                   is touch the right key at the right time and the instrument
                   will play itself

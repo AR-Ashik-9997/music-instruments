@@ -37,8 +37,10 @@ input::-webkit-inner-spin-button {
   width: 80%;
   padding-top: 5rem;  
 }
-
+.pb{
+padding-bottom: 10rem;
+}
 .bg-background{
-  background: linear-gradient(90deg, #202d31, #202f32, #213032, #223232, #233332, #243432, #263631, #283731);
+  background: linear-gradient(90deg, #b7d5c3, #bad8c3, #bcdbc4, #c0dec4, #c3e1c4, #c7e4c4, #cbe6c3, #cfe9c3);
   background-repeat: no-repeat;
 }

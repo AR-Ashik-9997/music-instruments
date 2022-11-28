@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AiOutlineStar,AiFillStar} from "react-icons/ai";
 import AdvertiseItems from "../Advertise/AdvertiseItems";
 import useTitle from './../../utility/TitleHooks';
+import { Link } from "react-router-dom";
 
 const Home = () => {
   useTitle("Music Instruments");
@@ -47,7 +48,7 @@ const Home = () => {
                   is touch the right key at the right time and the instrument
                   will play itself.
                 </p>
-                <Button variant="dark" className="mt-4 bt-lg">Shop Now</Button>
+                <Link to="/"><Button variant="dark" className="mt-4 bt-lg">Shop Now</Button></Link>
               </div>
             </Col>
             <Col
@@ -109,7 +110,7 @@ const Home = () => {
           </div>
           <Row className="g-4">
             <Col lg={4} md={4} sm={12}>
-              <Card>
+              <Card className="rounded-4">
                 <img
                   src="https://www.pngarts.com/files/6/User-Avatar-in-Suit-PNG.png"
                   className="testimonial-image d-block mx-auto mt-5"
@@ -134,7 +135,7 @@ const Home = () => {
               </Card>
             </Col>
             <Col lg={4} md={4} sm={12}>
-              <Card>
+            <Card className="rounded-4">
                 <img
                   src="https://www.pngarts.com/files/6/User-Avatar-in-Suit-PNG.png"
                   className="testimonial-image d-block mx-auto mt-5"
@@ -159,7 +160,7 @@ const Home = () => {
               </Card>
             </Col>
             <Col lg={4} md={4} sm={12}>
-              <Card>
+            <Card className="rounded-4">
                 <img
                   src="https://www.pngarts.com/files/6/User-Avatar-in-Suit-PNG.png"
                   className="testimonial-image d-block mx-auto mt-5"

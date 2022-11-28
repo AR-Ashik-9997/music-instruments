@@ -151,7 +151,7 @@ const SignUp = () => {
   };
 
   return (
-    <Container className="home-container">
+    <Container className="pb-5">
       <Row>
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
@@ -163,7 +163,7 @@ const SignUp = () => {
           </div>
         </Col>
         <Col lg={6} md={6} sm={12} className="d-flex align-items-center pt-5">
-          <div className="bg-white w-75 rounded-4 mx-auto mt-5 mb-5">
+          <div className="bg-background w-75 rounded-4 mx-auto mt-5 mb-5">
             <h1 className="text-center mb-4 pt-5">Sign-Up</h1>
             <Form className="mx-auto w-75" onSubmit={handleSubmit}>
               <Form.Group className="mb-4" controlId="formBasicname">
@@ -220,7 +220,7 @@ const SignUp = () => {
               <span className="text-danger">{errors.firebase}</span>
               <div className="d-flex justify-content-center pb-5 pt-4">
                 <Button
-                  variant="outline-info"
+                  variant="dark"
                   type="submit"
                   className="w-75 mb-4 rounded-3"
                 >
