@@ -1,6 +1,10 @@
 ## Resell Music Instruments 
 Live site: https://resell-market-43d50.web.app
 
+*** Admin login information ***
+* email: useradmin@gmail.com
+* password: @Useradmin@
+
 ## Features of my Website
 
 * Responsive design using React Bootstrap. 
