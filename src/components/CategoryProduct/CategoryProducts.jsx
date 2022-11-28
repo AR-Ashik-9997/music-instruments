@@ -128,7 +128,7 @@ console.log(products);
               <Row className="g-4 mt-3">
                 {products.map((product) => (
                   <Col lg={4} md={6} sm={12} key={product._id}>
-                    <Card>
+                    <Card className="bg-background">
                       <Link>
                         <PhotoProvider>
                           <PhotoView src={product.image}>
@@ -179,7 +179,7 @@ console.log(products);
                         </div>
                         <div className="d-flex justify-content-between mt-5">
                           <Button
-                            variant="outline-primary"
+                            variant="dark"
                             onClick={() => {
                               setModalShow(true);
                               setProduct(product);

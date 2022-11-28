@@ -114,11 +114,11 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="home-container">
+    <div>
       <Container className="top-margin">
         <Row>          
           <Col lg={12} md={12} sm={12}>
-            <div className="bg-white rounded-4 mx-auto mt-5 mb-5">
+            <div className="bg-background w-75 rounded-4 mx-auto mt-5 mb-5">
               <h1 className="text-center mb-4 pt-5">Add Product</h1>
               <Form className="mx-auto w-75" onSubmit={handleSubmit}>
                 <Form.Group className="mb-4" controlId="formBasicproductName">
@@ -231,8 +231,8 @@ const AddProduct = () => {
                 <div className="d-flex justify-content-center">
                   <Button
                     type="submit"
-                    variant="outline-info"
-                    className="w-75 rounded-3 mb-5"
+                    variant="dark"
+                    className="w-50 rounded-3 mb-5"
                   >
                     Add service
                   </Button>

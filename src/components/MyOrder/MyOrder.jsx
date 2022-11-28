@@ -47,7 +47,7 @@ const MyOrder = () => {
             {orderInfo.length > 0 ? (
               <>
                 <h1 className="text-center mb-5">My Order</h1>
-                <Table striped bordered hover responsive>
+                <Table striped bordered hover responsive className="bg-background">
                   <thead>
                     <tr>
                       <th className="text-center">Image</th>

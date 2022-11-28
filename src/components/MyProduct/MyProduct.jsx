@@ -59,11 +59,11 @@ const MyProduct = () => {
     <Container className="pb mt-5">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="mt-5 mb-5">
+          <div className="mt-5 mb-5 bg-background">
             {MyProduct.length > 0 ? (
               <>
                 <h1 className="text-center mb-5">My Product</h1>
-                <Table striped bordered hover responsive>
+                <Table striped bordered hover responsive >
                   <thead>
                     <tr>
                       <th className="text-center">Product Name</th>
@@ -115,7 +115,7 @@ const MyProduct = () => {
                         </td>
                         <td className="text-center">
                           <Button
-                            variant="outline-danger"
+                            variant="dark"
                             onClick={() => handleDelete(product)}
                           >
                             Delete

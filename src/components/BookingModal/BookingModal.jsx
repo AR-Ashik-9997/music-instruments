@@ -107,7 +107,7 @@ return (
           </Form.Group>
           <div className="d-flex justify-content-center pt-4">
             <Button
-              variant="outline-primary"
+              variant="dark"
               type="submit"
               className="w-100 rounded-3 mb-3"
             >
