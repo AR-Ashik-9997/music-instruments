@@ -72,7 +72,7 @@ const Home = () => {
                 <h3 className="ms-5 me-5 text-center">Advertise Product</h3>
                 <hr className="hr-width" />
               </div>
-              <Row>
+              <Row className="g-4 mt-3">
                 {addvertiseProduct.map((advProduct) => (
                   <AdvertiseItems key={advProduct._id} data={advProduct} />
                 ))}

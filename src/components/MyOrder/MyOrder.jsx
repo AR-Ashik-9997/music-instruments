@@ -8,6 +8,7 @@ import { AuthContext } from "./../../utility/AuthProvider";
 const MyOrder = () => {
   const { user, Logout } = useContext(AuthContext);
   const [orderInfo, setOrderInfo] = useState([]);
+  const [Pay, setPay] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/orderInfo?email=${user?.email}`, {
       headers: {
@@ -23,6 +24,18 @@ const MyOrder = () => {
       })
       .then((data) => setOrderInfo(data));
   }, [user?.email, Logout]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/checkpayment?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPay(data);
+      });
+  }, [user?.email]);
 
   return (
     <Container>
@@ -60,7 +73,15 @@ const MyOrder = () => {
                         <td className="text-center">{order.productName}</td>
                         <td className="text-center ">$ {order.sellPrice}</td>
                         <td className="text-center">
-                         <Link to={`/dashboard/payment/${order._id}`}><Button variant="outline-primary">Pay</Button></Link>
+                          {Pay.email ? (
+                            <p>paid</p>
+                          ) : (
+                            <>
+                              <Link to={`/dashboard/payment/${order._id}`}>
+                                <Button variant="outline-primary">Pay</Button>
+                              </Link>
+                            </>
+                          )}
                         </td>
                       </tr>
                     ))}

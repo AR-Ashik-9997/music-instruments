@@ -145,7 +145,7 @@ const CategoryProducts = () => {
                           <Card.Title className="fs-3">$ {product.sellPrice}</Card.Title>
                         </div>
                         <Card.Text className="text-justify font-size mt-3">
-                          {product.description}
+                          {product.description.substr(0, 250)}
                         </Card.Text>
                         <div className="d-flex justify-content-between mt-3">
                           <div>
