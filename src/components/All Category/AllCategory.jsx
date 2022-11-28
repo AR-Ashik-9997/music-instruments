@@ -46,7 +46,7 @@ const AllCategory = () => {
                   is touch the right key at the right time and the instrument
                   will play itself.
                 </p>
-                <Button className="mt-4">Shop Now</Button>
+                <Button className="mt-4 btn-lg" variant="dark">Shop Now</Button>
               </div>
             </Col>
             <Col lg={6} md={12} sm={12}>
