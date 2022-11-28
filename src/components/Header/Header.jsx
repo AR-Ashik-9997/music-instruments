@@ -14,7 +14,7 @@ const Header = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <Navbar className="navbar" expand="lg">
+    <Navbar className="navbar mt-4" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fs-2 fw-bold">
         <img
@@ -31,6 +31,9 @@ const Header = () => {
           <Nav className="ms-auto">
           <Nav.Link as={Link} to="/" className="fs-5">
               Home
+            </Nav.Link>            
+          <Nav.Link as={Link} to="/all-category" className="fs-5">
+              All Category
             </Nav.Link>            
             <Nav.Link as={Link} to="/dashboard" className="fs-5">
               Dashboard
@@ -71,7 +74,7 @@ const Header = () => {
             ) : (
               <div className="d-flex align-items-center d-grid gap-3 d-block">
                 <Link to="/signIn">
-                  <Button variant="outline-primary btn-md">
+                  <Button variant="dark btn-md">
                     Sign-In
                   </Button>
                 </Link>

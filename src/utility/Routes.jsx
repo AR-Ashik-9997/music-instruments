@@ -19,6 +19,7 @@ import SellerRoute from "../components/PrivateRoute/SellerRoute";
 import Payment from "../components/Payment/Payment";
 import ErrorPage from "./ErrorPage";
 import Blogs from "../components/Blog/Blogs";
+import AllCategory from "../components/All Category/AllCategory";
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
     errorElement:<ErrorPage/>,
     children: [
       { path: "/", element: <Home /> },
+      { path: "/all-category", element: <AllCategory /> },
       {
         path: "/category/:id",
         element: (
