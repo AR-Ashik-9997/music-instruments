@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Col, Container, Row, Spinner, Table } from "react-bootstrap";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../utility/AuthProvider";
 import useTitle from "../../utility/TitleHooks";
 const MyProduct = () => {
   useTitle("Product Info");
+  const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
   const notify = () => toast.success("Delete Successful.");
   const { data: MyProduct = [], refetch } = useQuery({
@@ -21,6 +22,7 @@ const MyProduct = () => {
         }
       );
       const data = await res.json();
+      setLoading(false);
       return data;
     },
   });
@@ -55,6 +57,13 @@ const MyProduct = () => {
         });
     }
   };
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Spinner animation="border" variant="success" />
+      </div>
+    );
+  }
   return (
     <Container className="pb mt-5">
       <Row>

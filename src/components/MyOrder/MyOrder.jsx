@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner, Table } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { AuthContext } from "./../../utility/AuthProvider";
 
 const MyOrder = () => {
   useTitle("All Order Info");
+  const [loading, setLoading] = useState(true);
   const { user, Logout } = useContext(AuthContext);
   const [orderInfo, setOrderInfo] = useState([]);
   const [Pay, setPay] = useState([]);
@@ -24,7 +25,10 @@ const MyOrder = () => {
 
         return response.json();
       })
-      .then((data) => setOrderInfo(data));
+      .then((data) => {
+        setOrderInfo(data)
+        setLoading(false);
+      });
   }, [user?.email, Logout]);
 
   useEffect(() => {
@@ -38,7 +42,13 @@ const MyOrder = () => {
         setPay(data);
       });
   }, [user?.email]);
-
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Spinner animation="border" variant="success" />
+      </div>
+    );
+  }
   return (
     <Container className="pb mt-5">
       <Row>

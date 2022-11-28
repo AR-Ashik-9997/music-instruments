@@ -17,6 +17,7 @@ import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
 import useTitle from './../../utility/TitleHooks';
 const CategoryProducts = () => {
+ 
   useTitle("Product");
   const notify = () => toast.success("Report Successfully sent.");
   const { user } = useContext(AuthContext);

@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, EffectFade } from "swiper";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import useTitle from "../../utility/TitleHooks";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 const AllCategory = () => {
   useTitle("All Category");
+  const [loading, setLoading] = useState(true);
   const { data: allcategory = [] } = useQuery({
     queryKey: ["allcategory"],
     queryFn: async () => {
       const res = await fetch("https://music-data-six.vercel.app/allCategory");
       const data = await res.json();
+      setLoading(false);
       return data;
     },
   });
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Spinner animation="border" variant="success" />
+      </div>
+    );
+  }
   return (
     <>
       <section className="mt-5 mb-5">
