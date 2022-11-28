@@ -13,7 +13,7 @@ const Home = () => {
   const { data: catagoriesData = [] } = useQuery({
     queryKey: ["catagoriesData"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/cardCategory");
+      const res = await fetch("https://music-data-six.vercel.app/cardCategory");
       const data = await res.json();
       return data;
     },
@@ -23,7 +23,7 @@ const Home = () => {
     queryKey: ["addvertiseProduct"],
     queryFn: async () => {
       const res = await fetch(
-        "http://localhost:5000/advertiseProduct"
+        "https://music-data-six.vercel.app/advertiseProduct"
       );
       const data = await res.json();
       return data;

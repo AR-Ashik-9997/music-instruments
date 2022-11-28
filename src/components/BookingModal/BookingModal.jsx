@@ -18,7 +18,7 @@ const handleSubmit = (event) => {
   const email = form.email.value;
   axios({
     method: "post",
-    url: "http://localhost:5000/bookingProducts",
+    url: "https://music-data-six.vercel.app/bookingProducts",
     data: {
       productId: _id,
       buyerEmail: email,

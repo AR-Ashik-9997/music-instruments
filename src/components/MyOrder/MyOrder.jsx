@@ -12,7 +12,7 @@ const MyOrder = () => {
   const [orderInfo, setOrderInfo] = useState([]);
   const [Pay, setPay] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/orderInfo?email=${user?.email}`, {
+    fetch(`https://music-data-six.vercel.app/orderInfo?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("secret-token")}`,
       },
@@ -28,7 +28,7 @@ const MyOrder = () => {
   }, [user?.email, Logout]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/checkpayment?email=${user?.email}`, {
+    fetch(`https://music-data-six.vercel.app/checkpayment?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("secret-token")}`,
       },

@@ -10,7 +10,7 @@ const ReportedInfo = () => {
   const { data: reported = [], refetch } = useQuery({
     queryKey: ["reported"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reportInfo");
+      const res = await fetch("https://music-data-six.vercel.app/reportInfo");
       const data = await res.json();
       return data;
     },
@@ -23,7 +23,7 @@ const ReportedInfo = () => {
     if (agree) {
       axios({
         method: "DELETE",
-        url: `http://localhost:5000/report-info-delete/${report._id}`,
+        url: `https://music-data-six.vercel.app/report-info-delete/${report._id}`,
       })
         .then((response) => console.log(response.data))
         .then(() => {

@@ -42,13 +42,13 @@ const AddProduct = () => {
       year: "numeric",
     });
 
-    fetch(`http://localhost:5000/all-Category-data-find?name=${category}`)
+    fetch(`https://music-data-six.vercel.app/all-Category-data-find?name=${category}`)
       .then((res) => res.json())
       .then((data) => {               
         if (data.length > 0) {
           axios({
             method: "post",
-            url: "http://localhost:5000/AddProduct",
+            url: "https://music-data-six.vercel.app/AddProduct",
             data: {
               email: user?.email,
               sellerName: user?.displayName,
@@ -75,7 +75,7 @@ const AddProduct = () => {
         } else {
           axios({
             method: "post",
-            url: "http://localhost:5000/AddProduct",
+            url: "https://music-data-six.vercel.app/AddProduct",
             data: {
               email: user?.email,
               sellerName: user?.displayName,
@@ -100,7 +100,7 @@ const AddProduct = () => {
             .then({});
           axios({
             method: "post",
-            url: "http://localhost:5000/AddCategory",
+            url: "https://music-data-six.vercel.app/AddCategory",
             data: {
               categoryId: geneatedId,
               name: category,

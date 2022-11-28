@@ -27,7 +27,7 @@ const CategoryProducts = () => {
   const handleReport = (data) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/AddReport",
+      url: "https://music-data-six.vercel.app/AddReport",
       data: {
         category: data.category,
         product: data.productName,

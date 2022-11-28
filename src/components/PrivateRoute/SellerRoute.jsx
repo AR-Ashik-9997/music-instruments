@@ -10,7 +10,7 @@ const SellerRoute = ({ children }) => {
   const [adminLoading, setLoading] = useState(true);
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/access/${user?.email}`, {
+      fetch(`https://music-data-six.vercel.app/access/${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("secret-token")}`,
         },

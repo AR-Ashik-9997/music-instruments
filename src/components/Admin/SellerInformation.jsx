@@ -13,7 +13,7 @@ const SellerInformation = () => {
   const { data: sellerInfo = [], refetch } = useQuery({
     queryKey: ["sellerInfo"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allseller?role=seller");
+      const res = await fetch("https://music-data-six.vercel.app/allseller?role=seller");
       const data = await res.json();
       return data;
     },
@@ -23,7 +23,7 @@ const SellerInformation = () => {
     const update = {
       verified: "true",
     };
-    fetch(`http://localhost:5000/varyfySeller/${seller._id}`, {
+    fetch(`https://music-data-six.vercel.app/varyfySeller/${seller._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -41,7 +41,7 @@ const SellerInformation = () => {
       .then(() => {
         
       });
-    fetch(`http://localhost:5000/updateSeller/${seller.email}`, {
+    fetch(`https://music-data-six.vercel.app/updateSeller/${seller.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -68,7 +68,7 @@ const SellerInformation = () => {
     if (agree) {
       axios({
         method: "DELETE",
-        url: `http://localhost:5000/seller-info-delete/${id._id}`,
+        url: `https://music-data-six.vercel.app/seller-info-delete/${id._id}`,
       })
         .then((response) => console.log(response.data))
         .then(() => {

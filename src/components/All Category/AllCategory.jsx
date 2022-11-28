@@ -14,7 +14,7 @@ const AllCategory = () => {
   const { data: allcategory = [] } = useQuery({
     queryKey: ["allcategory"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allCategory");
+      const res = await fetch("https://music-data-six.vercel.app/allCategory");
       const data = await res.json();
       return data;
     },

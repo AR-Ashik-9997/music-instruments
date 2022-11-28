@@ -10,7 +10,7 @@ const AllBuyerInfo = () => {
   const { data: buyerData = [], refetch } = useQuery({
     queryKey: ["buyerData"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allbuyer?role=buyer");
+      const res = await fetch("https://music-data-six.vercel.app/allbuyer?role=buyer");
       const data = await res.json();
       return data;
     },
@@ -22,7 +22,7 @@ const AllBuyerInfo = () => {
     if (agree) {
       axios({
         method: "DELETE",
-        url: `http://localhost:5000/buyer-info-delete/${info._id}`,
+        url: `https://music-data-six.vercel.app/buyer-info-delete/${info._id}`,
       })
         .then((response) => console.log(response.data))
         .then(() => {

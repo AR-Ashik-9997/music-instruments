@@ -14,7 +14,7 @@ const CheckOutForm = ({ data }) => {
   const { _id,productId, sellPrice, username, buyerEmail } = data;
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://music-data-six.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const CheckOutForm = ({ data }) => {
         productId: productId,
         status: "sold"
       };
-      fetch("http://localhost:5000/paymentInfo-stored", {
+      fetch("https://music-data-six.vercel.app/paymentInfo-stored", {
         method: "POST",
         headers: {
           "content-type": "application/json",

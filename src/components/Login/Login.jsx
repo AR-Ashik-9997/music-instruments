@@ -60,7 +60,7 @@ const Login = () => {
         const currentUser = {
           email: user.email,
         };
-        fetch("http://localhost:5000/jwt ", {
+        fetch("https://music-data-six.vercel.app/jwt ", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const Login = () => {
           .then((response) => response.json())
           .then((data) => {
             localStorage.setItem("secret-token", data.token);
-            fetch(`http://localhost:5000/checkRegister?email=${user.email}`, {
+            fetch(`https://music-data-six.vercel.app/checkRegister?email=${user.email}`, {
               headers: {
                 authorization: `Bearer ${localStorage.getItem("secret-token")}`,
               },
@@ -82,7 +82,7 @@ const Login = () => {
                 } else {
                   axios({
                     method: "post",
-                    url: "http://localhost:5000/AddRegister",
+                    url: "https://music-data-six.vercel.app/AddRegister",
                     data: {
                       username: user.displayName,
                       photo: user.photoURL,

@@ -13,7 +13,7 @@ const MyProduct = () => {
     queryKey: ["MyProduct"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/sellerProduct?email=${user.email}`,
+        `https://music-data-six.vercel.app/sellerProduct?email=${user.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("secret-token")}`,
@@ -29,7 +29,7 @@ const MyProduct = () => {
       advertise: "true",
     };
     axios({
-      url: `http://localhost:5000/update-advertisement/${product._id}`,
+      url: `https://music-data-six.vercel.app/update-advertisement/${product._id}`,
       method: "put",
       data: update,
     })
@@ -46,7 +46,7 @@ const MyProduct = () => {
     if (agree) {
       axios({
         method: "DELETE",
-        url: `http://localhost:5000/seller-product-delete/${product._id}`,
+        url: `https://music-data-six.vercel.app/seller-product-delete/${product._id}`,
       })
         .then((response) => console.log(response.data))
         .then(() => {

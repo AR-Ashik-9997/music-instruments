@@ -38,7 +38,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/cardProduct/${params.id}`),
+          fetch(`https://music-data-six.vercel.app/cardProduct/${params.id}`),
       },
       { path: "/blogs", element: <Blogs /> },
       { path: "/signup", element: <SignUp /> },
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       { path: "/dashboard/myProduct", element: <SellerRoute><MyProduct /></SellerRoute>},
       { path: "/dashboard/addProduct", element:<SellerRoute> <AddProduct /></SellerRoute> },      
       { path: "/dashboard/myOrder", element: <MyOrder /> },
-      { path: "/dashboard/payment/:id", element: <Payment></Payment>,loader:async ({params})=>fetch(`http://localhost:5000/payment/${params.id}`)},
+      { path: "/dashboard/payment/:id", element: <Payment></Payment>,loader:async ({params})=>fetch(`https://music-data-six.vercel.app/payment/${params.id}`)},
       { path: "/dashboard/all-seller", element: <AdminRoute><SellerInformation /></AdminRoute> },
       { path: "/dashboard/all-buyer", element: <AdminRoute><AllBuyerInfo /></AdminRoute> },
       { path: "/dashboard/reported-info", element: <AdminRoute><ReportedInfo /></AdminRoute> },
