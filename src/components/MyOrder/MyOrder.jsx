@@ -60,7 +60,7 @@ const MyOrder = () => {
                         <td className="text-center">{order.productName}</td>
                         <td className="text-center ">$ {order.sellPrice}</td>
                         <td className="text-center">
-                          <Button variant="outline-primary">Payment</Button>
+                         <Link to={`/dashboard/payment/${order._id}`}><Button variant="outline-primary">Pay</Button></Link>
                         </td>
                       </tr>
                     ))}

@@ -16,6 +16,8 @@ import ReportedInfo from "../components/Admin/ReportedInfo";
 import Dashboard from "../components/DashboardLayout/Dashboard";
 import AdminRoute from "../components/PrivateRoute/AdminRoute";
 import SellerRoute from "../components/PrivateRoute/SellerRoute";
+import Payment from "../components/Payment/Payment";
+import { async } from "@firebase/util";
 
 const router = createBrowserRouter([
   {
@@ -49,9 +51,11 @@ const router = createBrowserRouter([
       { path: "/dashboard/myProduct", element: <SellerRoute><MyProduct /></SellerRoute>},
       { path: "/dashboard/addProduct", element:<SellerRoute> <AddProduct /></SellerRoute> },      
       { path: "/dashboard/myOrder", element: <MyOrder /> },
+      { path: "/dashboard/payment/:id", element: <Payment></Payment>,loader:async ({params})=>fetch(`http://localhost:5000/payment/${params.id}`)},
       { path: "/dashboard/all-seller", element: <AdminRoute><SellerInformation /></AdminRoute> },
       { path: "/dashboard/all-buyer", element: <AdminRoute><AllBuyerInfo /></AdminRoute> },
       { path: "/dashboard/reported-info", element: <AdminRoute><ReportedInfo /></AdminRoute> },
+      
     ],
   },
 ]);
