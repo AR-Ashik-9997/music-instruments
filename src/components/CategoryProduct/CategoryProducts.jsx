@@ -38,7 +38,7 @@ const CategoryProducts = () => {
         notify();
       });
   };
-
+console.log(products);
   return (
     <>
       <section className="mt-5 mb-5">

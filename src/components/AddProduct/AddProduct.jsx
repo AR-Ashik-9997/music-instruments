@@ -10,24 +10,24 @@ const AddProduct = () => {
     const img = event.target.files[0];
     const formData = new FormData();
     formData.append("image", img);
-    const url = "https://api.imgbb.com/1/upload?key=d8712d7ded066028fa6b90dd33cb71cf";
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`;
     fetch(url, {
       method: "POST",
       body: formData,
     })
-    .then((response) => response.json())
-            .then(imgData=>{
-              if(imgData.success){
-                setImageUrl(imgData.data.url);
-              }
-            });
+      .then((response) => response.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          setImageUrl(imgData.data.url);
+        }
+      });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
     const geneatedId = v4();
     const form = event.target;
     const productName = form.name.value;
-    const image=imageUrl;
+    const image = imageUrl;
     const phone = form.phone.value;
     const sellPrice = form.sellPrice.value;
     const condition = form.condition.value;
@@ -37,22 +37,22 @@ const AddProduct = () => {
     const description = form.description.value;
     const used = form.used.value;
     const currentTime = new Date().toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
     });
 
     fetch(`http://localhost:5000/all-Category-data-find?name=${category}`)
       .then((res) => res.json())
-      .then((data) => {
-        if (data.length>0) {
+      .then((data) => {               
+        if (data.length > 0) {
           axios({
             method: "post",
             url: "http://localhost:5000/AddProduct",
             data: {
               email: user?.email,
-              sellarName: user?.displayName,
-              categoryId: data.categoryId,
+              sellerName: user?.displayName,
+              categoryId: data[0].categoryId,
               productName: productName,
               image: image,
               phone: phone,
@@ -65,6 +65,7 @@ const AddProduct = () => {
               used: used,
               postedTime: currentTime,
               status: "Available",
+              verified: "false",
               addvertise: "false",
             },
           })
@@ -77,7 +78,7 @@ const AddProduct = () => {
             url: "http://localhost:5000/AddProduct",
             data: {
               email: user?.email,
-              sellarName: user?.displayName,
+              sellerName: user?.displayName,
               categoryId: geneatedId,
               productName: productName,
               image: imageUrl,
@@ -91,7 +92,8 @@ const AddProduct = () => {
               used: used,
               postedTime: currentTime,
               status: "Available",
-              verified:"false",
+              verified: "false",
+              addvertise: "false",
             },
           })
             .then((response) => console.log(response))
@@ -102,7 +104,7 @@ const AddProduct = () => {
             data: {
               categoryId: geneatedId,
               name: category,
-              image:imageUrl
+              image: imageUrl,
             },
           })
             .then((response) => console.log(response))

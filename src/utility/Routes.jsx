@@ -17,7 +17,7 @@ import Dashboard from "../components/DashboardLayout/Dashboard";
 import AdminRoute from "../components/PrivateRoute/AdminRoute";
 import SellerRoute from "../components/PrivateRoute/SellerRoute";
 import Payment from "../components/Payment/Payment";
-import { async } from "@firebase/util";
+
 
 const router = createBrowserRouter([
   {
