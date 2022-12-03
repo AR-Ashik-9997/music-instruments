@@ -17,11 +17,10 @@ const DashLayout = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          setRole(data.role);
+          setRole(data.role);          
         });
     }
   }, [user?.email]);
-
   return (
     <div>
       <Header />

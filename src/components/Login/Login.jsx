@@ -43,8 +43,33 @@ const Login = () => {
     SignInForm(email, password)
       .then((res) => {
         setErrors({ ...errors, firebase: "" });
-        form.reset();
-        navigate(from, { replace: true });
+        const user = res.user;
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("https://music-data-six.vercel.app/jwt ", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem("secret-token", data.token);
+            fetch(`https://music-data-six.vercel.app/checkRegister?email=${user.email}`, {
+              headers: {
+                authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.length > 0) {
+                  navigate(from, { replace: true });
+                } 
+              });
+          });
+        
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });
