@@ -159,7 +159,7 @@ const currentUser = {
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
             <img
-              src="https://cdni.iconscout.com/illustration/premium/thumb/sign-up-login-4489366-3723273.png"
+              src="https://i.ibb.co/cwMZ226/sign-up.png"
               alt=""
               className="d-block img-fluid mx-auto"
             />
