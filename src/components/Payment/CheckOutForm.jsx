@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Button, Spinner } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const CheckOutForm = ({ data }) => {
 
