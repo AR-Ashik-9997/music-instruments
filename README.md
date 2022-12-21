@@ -1,4 +1,4 @@
-## Sonic Revulation
+## Sonic Revolution
 Live site: https://resell-market-43d50.web.app
 
 *** Admin login information ***
