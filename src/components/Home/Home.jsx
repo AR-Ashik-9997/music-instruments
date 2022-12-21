@@ -91,7 +91,7 @@ const Home = () => {
               className="d-flex flex-column align-items-center justify-content-center"
             >
               <div className="mt-5">
-                <h1 className="fs-1">Choose Our Top Picks Music Instruments</h1>
+                <h1 className="fs-1">Choose Our Top Picks of Music Instruments</h1>
                 <p className="w-75 text-justify mt-4 fs-5">
                   It's easy to play any musical instrument: all you have to do
                   is touch the right key at the right time and the instrument
@@ -199,8 +199,8 @@ const Home = () => {
 
                 <Card.Body>
                   <Card.Text className="text-justify text-center">
-                    “Understanding the entire customer lifecycle in Music
-                    Instruments from discovery to purchase is crucial for
+                    “Understanding the entire customer lifecycle in Sonic
+                    Revulation from discovery to purchase is crucial for
                     increasing our conversions.”
                   </Card.Text>
                   <div className="d-flex justify-content-center">
