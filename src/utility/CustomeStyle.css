@@ -44,3 +44,11 @@ padding-bottom: 10rem;
   background: linear-gradient(90deg, #b7d5c3, #bad8c3, #bcdbc4, #c0dec4, #c3e1c4, #c7e4c4, #cbe6c3, #cfe9c3);
   background-repeat: no-repeat;
 }
+.kXteup:hover:enabled {  
+  background-color: rgb(0, 0, 0) !important;
+  box-shadow: 0 0 2px 0 #333 !important;
+}
+.cVXxbE{
+  box-shadow: 0 0 1px 3px rgb(6, 4, 8) !important;
+  background-color: rgb(0, 0, 0) !important;
+}

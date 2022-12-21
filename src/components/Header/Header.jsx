@@ -24,7 +24,7 @@ const Header = () => {
             height="50"
             alt=""
           />
-          Music-Instruments
+          Sonic Revolution
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

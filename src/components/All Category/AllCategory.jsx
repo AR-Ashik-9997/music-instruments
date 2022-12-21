@@ -46,7 +46,9 @@ const AllCategory = () => {
                   is touch the right key at the right time and the instrument
                   will play itself.
                 </p>
-                <Button className="mt-4 btn-lg" variant="dark">Shop Now</Button>
+                <Button className="mt-4 btn-lg" variant="dark">
+                  Shop Now
+                </Button>
               </div>
             </Col>
             <Col lg={6} md={12} sm={12}>
@@ -105,7 +107,7 @@ const AllCategory = () => {
       </section>
       <section>
         <Container>
-        <div className="d-flex justify-content-between pt-5 pb-5">
+          <div className="d-flex justify-content-between pt-5 pb-5">
             <hr className="hr-width" />
             <h3 className="ms-5 me-5 text-center">All Category</h3>
             <hr className="hr-width" />

@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Button, Card, Col, Container, Form } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import CardCatagories from "./../CardCatagories/CardCatagories";
 import { useQuery } from "@tanstack/react-query";
-import { AiOutlineStar,AiFillStar} from "react-icons/ai";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import AdvertiseItems from "../Advertise/AdvertiseItems";
-import useTitle from './../../utility/TitleHooks';
+import useTitle from "./../../utility/TitleHooks";
 import { Link } from "react-router-dom";
+import Carousel from "react-elastic-carousel";
+import * as EmailValidator from "email-validator";
+import emailjs from "@emailjs/browser";
+import toast, { Toaster } from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../../utility/AuthProvider";
 
 const Home = () => {
-  useTitle("Music Instruments");
+  const { user } = useContext(AuthContext);
+  useTitle("Sonic Revolution");
+  const notify = () => toast.success("Email sent successfully.");
+  const notify2 = () => toast.error("Please Login First.");
   const { data: catagoriesData = [] } = useQuery({
     queryKey: ["catagoriesData"],
     queryFn: async () => {
@@ -18,8 +27,49 @@ const Home = () => {
       return data;
     },
   });
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+  });
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    if (!EmailValidator.validate(email)) {
+      setErrors({ ...errors, email: "Please provide a valid email" });
+      setUserInfo({ ...userInfo, email: "" });
+    }
+    if (EmailValidator.validate(email)) {
+      setErrors({ ...errors, email: "" });
+      setUserInfo({ ...userInfo, email: e.target.value });
+    }
+  };
+  const form = useRef();
 
-  const { data: addvertiseProduct = [], } = useQuery({
+  const sendEmail = (e) => {
+    e.preventDefault();
+    if (user?.email) {
+      emailjs
+        .sendForm(
+          "service_7fz98dw",
+          "template_008ym0p",
+          form.current,
+          "gOFaU8Dkgb5g-0h8Z"
+        )
+        .then(
+          (result) => {
+            notify();
+            e.target.reset();
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    } else {
+      notify2();
+    }
+  };
+  const { data: addvertiseProduct = [] } = useQuery({
     queryKey: ["addvertiseProduct"],
     queryFn: async () => {
       const res = await fetch(
@@ -29,7 +79,6 @@ const Home = () => {
       return data;
     },
   });
-
   return (
     <div>
       <section className="mt-5 mb-5">
@@ -48,7 +97,11 @@ const Home = () => {
                   is touch the right key at the right time and the instrument
                   will play itself.
                 </p>
-                <Link to="/"><Button variant="dark" className="mt-4 btn-lg">Shop Now</Button></Link>
+                <Link to="/">
+                  <Button variant="dark" className="mt-4 btn-lg">
+                    Shop Now
+                  </Button>
+                </Link>
               </div>
             </Col>
             <Col
@@ -68,17 +121,19 @@ const Home = () => {
       </section>
       {addvertiseProduct.length > 0 ? (
         <>
-          <section className="mt-5 mb-5">
+          <section className="mt-5">
             <Container>
-              <div className="d-flex justify-content-between pt-5 pb-5">
+              <div className="d-flex justify-content-between pt-5">
                 <hr className="hr-width" />
                 <h3 className="ms-5 me-5 text-center">Advertise Product</h3>
                 <hr className="hr-width" />
               </div>
               <Row className="g-4 mt-3">
-                {addvertiseProduct.map((advProduct) => (
-                  <AdvertiseItems key={advProduct._id} data={advProduct} />
-                ))}
+                <Carousel>
+                  {addvertiseProduct.map((advProduct) => (
+                    <AdvertiseItems key={advProduct._id} data={advProduct} />
+                  ))}
+                </Carousel>
               </Row>
             </Container>
           </section>
@@ -87,7 +142,7 @@ const Home = () => {
         <></>
       )}
 
-      <section className="mt-5 mb-5">
+      <section className="mt-5">
         <Container>
           <div className="d-flex justify-content-between pt-5 pb-5">
             <hr className="hr-width" />
@@ -112,7 +167,7 @@ const Home = () => {
             <Col lg={4} md={4} sm={12}>
               <Card className="rounded-4">
                 <img
-                  src="https://www.pngarts.com/files/6/User-Avatar-in-Suit-PNG.png"
+                  src="https://www.playwire.com/hubfs/Stacy-headshot.png"
                   className="testimonial-image d-block mx-auto mt-5"
                   alt=""
                 />
@@ -135,9 +190,9 @@ const Home = () => {
               </Card>
             </Col>
             <Col lg={4} md={4} sm={12}>
-            <Card className="rounded-4">
+              <Card className="rounded-4">
                 <img
-                  src="https://www.pngarts.com/files/6/User-Avatar-in-Suit-PNG.png"
+                  src="https://www.playwire.com/hubfs/Jayson-headshot.png"
                   className="testimonial-image d-block mx-auto mt-5"
                   alt=""
                 />
@@ -160,9 +215,9 @@ const Home = () => {
               </Card>
             </Col>
             <Col lg={4} md={4} sm={12}>
-            <Card className="rounded-4">
+              <Card className="rounded-4">
                 <img
-                  src="https://www.pngarts.com/files/6/User-Avatar-in-Suit-PNG.png"
+                  src="https://www.playwire.com/hubfs/Scott%20headshot.png"
                   className="testimonial-image d-block mx-auto mt-5"
                   alt=""
                 />
@@ -203,15 +258,59 @@ const Home = () => {
                   offer and upcomming collections
                 </p>
 
-                <Form className="d-flex w-75 mt-4">
-                  <Form.Control
-                    type="search"
-                    placeholder="Enter your email address"
-                    className="me-2"
-                    aria-label="Search"
-                  />
+                <Form
+                  ref={form}
+                  onSubmit={sendEmail}
+                  className="d-flex w-75 mt-4"
+                >
+                  <Form.Group
+                    className="mb-3 d-none w-25"
+                    controlId="formBasicName"
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder="name"
+                      name="user_name"
+                      value={user?.displayName}
+                      autoComplete="off"
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3 w-100 me-2"
+                    controlId="formBasicemail"
+                  >
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter your email address"
+                      name="user_email"
+                      onChange={handleEmailChange}
+                      required
+                      autoComplete="off"
+                    />
+                    <Form.Text className="text-danger ">
+                      {errors.email}
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group
+                    className="d-none w-25"
+                    controlId="formBasicDescription"
+                  >
+                    <textarea
+                      name="message"
+                      className="form-control"
+                      id="exampleFormControlTextarea1"
+                      placeholder="Your Description here...."
+                      rows="3"
+                      value="I want to join the sonic revolution service. You are requested to please accept my joining and allow me to work under your supervision. Please advise as necessary."
+                    />
+                  </Form.Group>
                   <div>
-                    <Button variant="dark" className="btn-md">
+                    <Button
+                      variant="dark"
+                      className="btn-md"
+                      type="submit"
+                      value="Send"
+                    >
                       Join<span className="ms-2"></span>Now
                     </Button>
                   </div>
@@ -227,11 +326,13 @@ const Home = () => {
               <img
                 src="https://i.ibb.co/k6brHLq/image-removebg-preview.png"
                 alt=""
+                className="img-fluid mx-auto d-block"
               />
             </Col>
           </Row>
         </Container>
       </section>
+      <Toaster />
     </div>
   );
 };
