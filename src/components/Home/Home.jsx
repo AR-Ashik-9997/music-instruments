@@ -200,7 +200,7 @@ const Home = () => {
                 <Card.Body>
                   <Card.Text className="text-justify text-center">
                     “Understanding the entire customer lifecycle in Sonic
-                    Revulation from discovery to purchase is crucial for
+                    Revolution from discovery to purchase is crucial for
                     increasing our conversions.”
                   </Card.Text>
                   <div className="d-flex justify-content-center">
